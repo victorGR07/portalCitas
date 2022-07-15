@@ -1,0 +1,323 @@
+<div class="container"><br>
+  <ul class="collapsible">
+    <li class="listanormal">
+      <div class="collapsible-header " id="divheader1">
+        <i class="material-icons">account_balance</i>Agendar cita.
+      </div>
+      <div class="row" *ngIf="divtramite1"><br>
+        <div class="col s10 offset-s1" id="cambiodetamanio">
+          <div class="col s12" id="cambiodetamanio">
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-g-12 ui-md-12">
+
+                <div class="col s12">
+                  <div class="col s12 m4 l4">
+                    <div class="col s12">
+                      <label class="conseciontitulo">Trámite:</label>
+                    </div>
+                       <p-dropdown id="inputArea" [options]="tramites" [(ngModel)]="tramiteSeleccionado" filter="true" placeholder="Selecciona un trámite" (onChange)="cambioTramite($event)" [style]="{'width':'100%'}" [disabled]="!this.dialimite">
+                        <ng-template let-item pTemplate="selectedItem">
+                          <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+                        </ng-template>
+                        <ng-template let-car pTemplate="item">
+                          <div>
+                            <div>{{car.label}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+
+
+                  </div>
+                  <div class="col s12 m6 l6">
+                    <ng-container *ngIf="tramiteSeleccionado!=undefined">
+                      <div class="col s12">
+                        <label class="conseciontitulo">Descripción del trámite:</label>
+                      </div> <br>
+                      <div class="col s12">
+                         {{descripciontramite}}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s10 offset-s1" id="cambiodetamanio">
+          <div class="col s12" id="cambiodetamanio">
+            <div class="col s11"> <br>
+              <a id="btnverificarpago2" *ngIf="tramiteSeleccionado!=undefined" class="waves-effect waves-light btn" (click)="segundoPaso()">Continuar</a>
+              <a id="btnverificarpago2" *ngIf="tramiteSeleccionado==undefined" class="waves-effect waves-light btn" disabled>Continuar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="listanormal">
+      <div class="collapsible-header valign-wrapper" id="divheader2"><i class="material-icons">alarm</i>Selecciona el día y hora.</div>
+      <div class="row" *ngIf="divdiahora2">
+        <div class="col s10 offset-s1" id="cambiodetamanio"><br><br>
+          <div class="col s12" id="cambiodetamanio">
+            <label class="advertencia" *ngIf="tramiteSeleccionado!=undefined">
+              Trámite Seleccionado: {{tramiteSeleccionado.label}} <br>
+            </label>
+          </div>
+          <div class="col s12" id="cambiodetamanio"><br><br>
+          </div>
+          <div class="col s6" id="cambiodetamanio">
+            <div class="ui-g-12 ui-md-12">
+              <label class="conseciontitulo">Día:</label><br>
+              <p-calendar [(ngModel)]="date2" [minDate]="minDate" [maxDate]="maxDate" id="diaactual" name="diaactual" [locale]="es" dateFormat="dd/mm/yy" [disabledDays]="[0,6]" (click)="mostradias()" (ngModelChange)="cambioDia()"> </p-calendar>
+            </div>
+          </div>
+          <div class="col s6" id="cambiodetamanio">
+            <div class="ui-g-12 ui-md-12">
+              <label class="conseciontitulo">Horas Disponibles:</label><br><br>
+              <p-dropdown id="horas" [options]="horas" [(ngModel)]="horaSeleccionada" placeholder="Seleccionar una Hora" optionLabel="name" (onChange)="cambioHora($event)" [disabled]="disabledHora"></p-dropdown>
+            </div>
+          </div>
+          <label class="advertencia" *ngIf="mensajesinHoras == true">EN EL DÍA QUE SELECCIONÓ NO CUENTA CON HORAS DISPONIBLES, FAVOR DE SELECCIONAR OTRO DÍA.</label><br>
+          <div class="row">
+            <div class="progress" *ngIf="loading"><br><br>
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+          <div class="col s12" id="cambiodetamanio"><br><br>
+            <div class="col s12 m6 l6"><br>
+              <a class="waves-effect waves-light btn btncontinuar blue" (click)="primerPaso()">Regresar</a>
+
+                           </div>
+            <div class="col s2 m6 l6" id="cambiodetamanio7"><br>
+              <a id="btnverificarpago2" *ngIf="horaSeleccionada!=null && date2!=null" class="waves-effect waves-light btn btncontinuar" (click)="tercerPaso()">Continuar</a>
+              <a id="btnverificarpago2" *ngIf="horaSeleccionada==null || date2==null" class="waves-effect waves-light btn btncontinuar" disabled>Continuar</a>
+
+             </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="listanormal">
+      <div class="collapsible-header valign-wrapper" id="divheader3"><i class="material-icons">account_circle</i>Capturar Datos.</div>
+      <div class="row" *ngIf="divcaptura3">
+        <div class="col s10 offset-s1"><br><br>
+          <div class="row">
+            <div class="col s11 offset-s1">
+              <div class="col s6" id="cambiodetamanio1">
+                <p>
+                  <label>
+                    <input autocomplete="off" id="inputdefault" class="with-gap" name="group1" type="radio" (click)="buscarporpersonafisica()"/>
+                    <span class="buscadores"><label class="buscadores">Persona Física</label></span>
+                  </label>
+                </p>
+              </div>
+              <div class="col s6" id="cambiodetamanio2">
+                <p>
+                  <label>
+                    <input autocomplete="off" class="with-gap" name="group1" type="radio" (click)="buscarporpersonamoral()" />
+                    <span class="buscadores"><label class="buscadores">Persona Moral</label></span>
+                  </label>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div id="persona1" class="row" *ngIf="mostrarFormulario">
+            <form [formGroup]="boxForm" (ngSubmit)="verificardatos()">
+              <div class="row" formArrayName="items" *ngFor="let item of items.controls; let i = index;" style="margin-bottom: 10px">
+                <div class="form-group" [formGroupName]="i">
+                  <div class="row"><br>
+                    <div class="col s10 offset-s1">
+                      <div class="input-field col s4" id="cambiodetamanio" *ngIf="personafisicaopcion">
+                        <div>
+                          <label class="conseciontitulo">Nombre (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" autocomplete="off" formControlName="nombre" id="nombre" name="nombre" class="inputText" pInputText style="text-transform: uppercase" />
+                        </div>
+                      </div>
+                      <div class="input-field col s4" id="cambiodetamanio" *ngIf="personafisicaopcion">
+                        <div>
+                          <label class="conseciontitulo">Primer Apellido (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" autocomplete="off" required formControlName="primerApellido" id="primerApellido" name="primerApellido" style="text-transform: uppercase">
+                        </div>
+                      </div>
+                      <div class="input-field col s4" id="cambiodetamanio" *ngIf="personafisicaopcion">
+                        <div>
+                          <label class="conseciontitulo">Segundo Apellido</label>
+                        </div>
+                        <div>
+                          <input type="text" autocomplete="off" formControlName="segundoApellido" id="segundoApellido" name="segundoApellido" style="text-transform: uppercase">
+                        </div>
+                      </div>
+                      <div class="input-field col s4" id="cambiodetamanio" *ngIf="personafisicaopcion">
+                        <div>
+                          <label class="conseciontitulo">RFC (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" data-length="13"  autocomplete="off" formControlName="rfc" id="rfc" name="rfc" style="text-transform: uppercase" (blur)=reemplazarrfc()>
+                        </div>
+                      </div>
+                      <div class="input-field col s8" id="cambiodetamanio5" *ngIf="personamoralopcion">
+                        <div>
+                          <label class="conseciontitulo">Razón Social (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" autocomplete="off" required autocomplete="off" formControlName="razonSocial" id="razonSocial" name="razonSocial">
+                        </div>
+                      </div>
+                      <div class="input-field col s4" id="cambiodetamanio5" *ngIf="personamoralopcion">
+                        <div>
+                          <label class="conseciontitulo">RFC (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" data-length="12" autocomplete="off" formControlName="rfc" id="rfcMoral" name="rfcMoral" style="text-transform: uppercase" (blur)=reemplazarrfc()>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s10 offset-s1">
+                      <div class="input-field col s4" id="cambiodetamanio">
+                        <div>
+                          <label class="conseciontitulo">Teléfono (*)</label>
+                        </div>
+                        <div>
+                          <input type="text" data-length="10" maxlength="10" autocomplete="off" numbersOnly formControlName="telefono" id="telefono" name="telefono" style="text-transform: uppercase">
+                        </div>
+                      </div>
+                      <div class="input-field col s4" id="cambiodetamanio">
+                        <div>
+                          <label class="conseciontitulo">Correo (*)</label>
+                        </div>
+                        <div>
+                          <input formControlName="email" autocomplete="off" name="autocomplete-correo" autocomplete="off" type="text" id="autocomplete-correo">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12" id="cambiodetamanio"><br><br>
+                <div class="col s9 offset-s1" id="cambiodetamanio11" >
+
+                <ul>
+                  <li><label class="advertencia">* LA CITA DEBERÁ ESTAR A NOMBRE DEL TITULAR DEL TRÁMITE.</label></li><br>
+                </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12" id="cambiodetamanio11">
+                  <div class="col s9 offset-s1" id="cambiodetamanio11" *ngIf="this.verificarerrores">
+                    <ng-container *ngIf="personafisicaopcion">
+                      <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].nombre.invalid"> Favor de escribir el nombre del contribuyente. </div>
+                      <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].primerApellido.invalid"> Favor de escribir el primer apellido del contribuyente. </div>
+                    </ng-container>
+                    <ng-container *ngIf="personamoralopcion">
+                      <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].razonSocial.invalid"> Favor de escribir la Razón Social del contribuyente. </div>
+                    </ng-container>
+                    <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].rfc.invalid"> Favor de escribir el RFC correcto del contribuyente. </div>
+                    <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].telefono.invalid"> Favor de escribir el teléfono celular del contribuyente. </div>
+                    <div class="msg msg-error z-depth-3 scale-transition" *ngIf="boxForm.get('items')['controls'][0]['controls'].email.invalid"> Favor de escribir correctamente el correo del contribuyente. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s10 offset-s1">
+                  <div class="input-field col s12 center-aling" id="cambiodetamanio">
+                    <div class="col s12 m6 l6">
+                       <button class="waves-effect waves-light btn blue" (click)="segundoPaso()">Regresar</button>
+
+                     </div>
+                    <div class="col s12 m6 l6">
+                      <button type="submit" class="waves-effect waves-light btn">Continuar</button>
+
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="listanormal">
+      <div class="collapsible-header valign-wrapper" id="divheader4"><i class="material-icons">playlist_add_check</i>Finalizar.</div>
+      <div class="row" *ngIf="divfinalizar4">
+        <div class="col s10 offset-s1"><br><br>
+          <div class="col s12" id="cambiodetamanio">
+            <div class="col s2" id="divresponsivosinright">
+              <label class="conseciontitulored">Trámite: </label>
+            </div>
+            <div class="col s7" id="cambiodetamanio" *ngIf="tramiteseleccionadolabel!=undefined">
+              <label class="conseciontitulo">{{tramiteseleccionadolabel.label}} </label>
+            </div>
+          </div>
+          <div class="col s12" id="cambiodetamanio">
+            <div class="col s2" id="divresponsivosinright">
+              <label class="conseciontitulored">Día: </label>
+            </div>
+            <div class="col s7" id="cambiodetamanio">
+              <label class="conseciontitulo"> {{funcioncrearfecha(this.date2)}}</label>
+            </div>
+          </div>
+          <div class="col s12" id="cambiodetamanio">
+            <div class="col s2" id="divresponsivosinright">
+              <label class="conseciontitulored">Hora: </label>
+            </div>
+            <div class="col s7" id="cambiodetamanio">
+              <label class="conseciontitulo"> {{horaSeleccionada.name}} </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="progress" *ngIf="loading"><br><br>
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+          <div class="col s12" id="cambiodetamanio">
+            <div class="col s4"></div>
+            <div class="col s12" id="cambiodetamanio">
+              <div class="col s12 m6 l6 center-align"><br>
+
+                <a id="btnverificarpago2" class="waves-effect waves-light btn red darken-1" (click)="cancelarCita()">Cancelar</a>
+
+
+                 <br><br>
+              </div>
+              <div class="col s12 m6 l6 center-align"><br>
+                <ng-container *ngIf="loading">
+                  <a id="btnverificarpago2" class="waves-effect waves-light btn" disabled>Registrar Cita</a>
+                </ng-container>
+                <ng-container *ngIf="!loading">
+                  <a id="btnverificarpago2" class="waves-effect waves-light btn" (click)="registrarCita()">Registrar Cita</a>
+                </ng-container>
+                <br><br>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div id="modalFinalizarCita" class="modal">
+  <div class="modal-content">
+    <div class="center"><br><br>
+      <label class="redTitulo">¡CITA REALIZADA CON ÉXITO!</label><br>
+      <label class="redTitulo" *ngIf="tramiteseleccionadolabel!=undefined">ACUSE DE CITA DEL TRÁMITE <b>{{tramiteseleccionadolabel.label.toUpperCase()}}</b>, LOS REQUISITOS SE MANDARON AL CORREO ELECTRÓNICO PROPORCIONADO.</label><br>
+      <label class="redTitulo" *ngIf="objCita!=undefined">FOLIO DE LA CITA: {{idFolio}} </label><br><br><br>
+
+    </div>
+    <div class="row">
+      <div class="col s12 center-align" id="cambiodetamanio11">
+        <a class="waves-effect waves-green btn " (click)="salirModalFinalizado()">CERRAR</a>
+      </div>
+    </div>
+  </div>
+</div>

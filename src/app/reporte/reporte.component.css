@@ -1,0 +1,451 @@
+.carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-details > .p-grid {
+          border: 1px solid #b3c2ca;
+          border-radius: 3px;
+          margin: 0.3em;
+          text-align: center;
+          padding: 2em 0 2.25em 0;
+      }
+
+      .conseciondatos{
+        word-break: break-all !important;
+      word-wrap: break-word !important;
+      }
+
+      .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data .car-title {
+          font-weight: 700;
+          font-size: 20px;
+          margin-top: 24px;
+      }
+      #divresponsivosinright{
+        text-align: right !important;
+   }
+
+   .redTitulo{
+     font-size: 28px;
+     color: #e91e63;
+     font-family: fuenteparatitulos;
+   }
+   .container {
+  margin: 0 auto;
+  max-width: 90% !important;
+  width: 90%;
+}
+
+.container {
+  width: 100% !important;
+}
+
+
+
+   .ui-dropdown .ui-dropdown-panel {
+  min-width: 100% !important;
+  width: max-content !important;
+}
+
+.btnbusqueda{
+  min-width: 200px !important;
+
+}
+
+.browser-default{
+  min-width: 100% !important;
+
+}
+
+
+      .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data .car-subtitle {
+          margin: 0.25em 0 2em 0;
+      }
+      .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data button {
+          margin-left: 0.5em;
+      }
+      .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data button:first-child {
+          margin-left: 0;
+      }
+      .carousel-demo .ui-carousel.custom-carousel .ui-carousel-dot-icon {
+          width: 16px !important;
+          height: 16px !important;
+          border-radius: 50%;
+      }
+      .carousel-demo .ui-carousel.ui-carousel-horizontal .ui-carousel-content .ui-carousel-item.ui-carousel-item-start .car-details > .p-grid {
+          margin-left: 0.6em;
+      }
+      .carousel-demo .ui-carousel.ui-carousel-horizontal .ui-carousel-content .ui-carousel-item.ui-carousel-item-end .car-details > .p-grid {
+          margin-right: 0.6em;
+      }
+
+      #horas{
+        width: 100% !important;
+      }
+
+      .conseciontitulored{
+        font-size: 18px;
+        color: #e91e63;
+        font-family: fuenteparatitulos;
+
+       }
+
+       .conseciontitulotabla{
+         font-size: 14px;
+
+       }
+.tituloPanel{
+  font-size: 17px !important;
+  font-weight: bold;
+
+}
+
+.descripcionPanel{
+  font-size: 18px !important;
+
+}
+ .ng-tns-c4-2{
+   width: 100px !important;
+   height: auto !important;
+ }
+.responsive {
+  width: 100% !important;
+  height: auto !important;
+}
+
+#video {
+    height: 240px !important;
+    width: 320px !important;
+
+ }
+
+#btnaceptar{
+  background-color: #00695c !important;
+  color: #FFFFFF !important;
+}
+#btncerrar{
+  background-color: #e57373 !important;
+  color: #000000 !important;
+}
+#imagenmostrada{
+  margin-top: 10px !important;
+}
+.collapsible-header{
+  background-color: #F1F1F1;
+}
+.carousel-slider {
+   height: 400px !important;
+}
+.arrows-carousel{
+  font-size: 66px !important;
+  padding-bottom: 160px !important;
+}
+.carousel .indicators .indicator-item {
+  display: inline-block !important;
+  position: relative !important;
+  cursor: pointer !important;
+  height: 8px !important;
+  width: 8px !important;
+  margin: 24px 4px !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  -webkit-transition: background-color .3s !important;
+  transition: background-color .3s !important;
+  border-radius: 50% !important;
+}
+
+
+.conseciontitulo{
+  font-size: 18px;
+  color: #000000;
+  font-family: fuenteparatitulos;
+ }
+
+.carousel .indicators .indicator-item.active {
+  background-color: #000 !important;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+#app {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+#video {
+  background-color: #000000;
+}
+
+.datoscuestionario{
+  font-size: 18px !important;
+  color: #000000;
+}
+
+#canvas {
+  display: none;
+}
+
+#image {
+    width:70% !important;
+    height: auto !important;
+
+}
+
+.justificado{
+  text-align: justify;
+text-justify: inter-word;
+}
+
+li {
+  display: inline;
+}
+
+label {
+  font-size: 14px;
+  color: #000000;
+}
+
+.nombresExamenes{
+  font-size: 26px;
+  color: #000000;
+  font-weight: bold;
+}
+
+
+.adventenciatexto{
+  font-size: 16px;
+  color: #000000;
+
+}
+
+.descripcionExamen{
+  font-size: 20px;
+  color: #000000;
+  font-weight: bold;
+}
+
+#divheader1{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#divheader2{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#divheader3{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#divheader4{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#divheader5{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.categorias-enunciado {
+  font-size: 18px;
+  color: #000000;
+}
+
+#botontomarfoto{
+  background-color:#ef5350;
+}
+
+.enunciadonormal{
+  color: #000000;
+}
+
+.center {
+  text-align: center;
+}
+
+.opcionesdeexamenes{
+  font-size: 18px;
+  color: #000000;
+}
+
+.advertencia{
+  font-size: 18px;
+  color: #e91e63;
+  font-weight: bold;
+}
+
+.teal{
+  color: #fff !important;
+}
+
+.atributoscuestionario{
+  font-weight: bold;
+  font-size: 18px;
+  color: #000 !important;
+}
+
+.helper-text{
+  font-size: 16px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #757575;
+  opacity: 1; /* Firefox */
+}
+
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+
+.btn-small{
+  background-color:#FFFFFF;
+ color: #e91e63;
+}
+
+.helper-text{
+  color: #e91e63;
+}
+
+
+@media screen and (max-width: 1300px) {
+  #image {
+  width:70% !important;
+  height: 130px !important;
+  }
+
+  label {
+    font-size: 17px;
+    color: #000000;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #divheader1{
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  p-scrollPanel{
+    height: 50px !important;
+
+  }
+
+  .cambiophone{
+    display: none;
+
+  }
+
+  #divheader2{
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  #divheader3{
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  #cambiodetamanio {
+    width: 100%;
+    margin-left: 0%;
+
+  }
+  .ui-dropdown    {
+    width:100% !important;
+  }
+  #cambiodetamanio2 {
+    width: 100%;
+  }
+
+  #cambiodetamanio10{
+    width: 100%;
+   }
+
+  #cambiodetamanio11{
+    width: 100%;
+   }
+
+   #cambiodetamanioiniciales{
+     width: 100%;
+     margin-left: 0%;
+
+   }
+
+  #cambiodetamaniobtnvalidar{
+    margin-left: 30%;
+  }
+
+  .atributoscuestionario{
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  #total{
+    width: 85%;
+    margin-left: 7.6666666667%;
+  }
+
+  .arrows-carousel{
+    font-size: 20px !important;
+    padding-bottom: 210px !important;
+  }
+
+  .advertencia{
+    font-size: 14px;
+    color: #e91e63;
+    font-weight: bold;
+  }
+
+  .descripcionExamen{
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+  }
+
+  .tituloPanel{
+    font-size: 14px !important;
+    font-weight: bold;
+
+  }
+
+  .descripcionPanel{
+    font-size: 13px !important;
+
+  }
+
+  #video {
+      height: 497px !important;
+      width: 374 !important;
+
+   }
+
+
+  #image {
+      width:80% !important;
+      height: 240px !important;
+    }
+
+ label {
+       font-size: 16px;
+       color: #000000;
+    }
+
+
+
+    #cambiodetamanio7{
+      width: 50%;
+     }
+
+     #divresponsivosinright{
+       width: 100%;
+       text-align: left !important;
+     }
+
+     #inputArea{
+       width: 80%;
+     }
+
+     #btnverificarpago2licencias{
+       height: 70px !important;
+     }
+}

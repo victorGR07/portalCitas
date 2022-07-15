@@ -1,0 +1,459 @@
+<div class="container"><br>
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader1"><i class="material-icons">search</i> Búsqueda.</div>
+      <div class="row" *ngIf="div1buscarfolio">
+        <div class="row"  >
+          <ul class="tabs">
+            <li class="tab col s6"><a href="#test1" (click)="limpiaropcionesbusqueda()"><label class="opbusqueda">Folio General</label></a></li>
+            <li class="tab col s6"><a href="#test2" (click)="limpiaropcionesbusqueda()"><label class="opbusqueda">Número de Cita</label></a></li>
+          </ul>
+          <div id="test1" class="col s12">
+            <div class="row"><br><br>
+              <div class="col s6 offset-s2" id="cambiodetamanio5">
+                <div class="input-field  col s9 offset-s2" id="cambiodetamanio88">
+                  <div>
+                    <label class="tituloparaformulario" for="curp" data-error="Error al escribir el Folio">FOLIO</label>
+                  </div>
+                  <div>
+                    <input numbersOnly autocomplete="off" placeholder="" maxlength="18" id="curp" style="text-transform: uppercase" name="curp" type="text" class="form-control" [(ngModel)]="folio" style="text-transform:uppercase;"
+                      (ngModelChange)="validarFolio()" (change)="validarFolio()">
+                  </div>
+
+                 </div>
+              </div>
+              <div class="col s4" id="cambiodetamanio522"><br><br>
+                <a *ngIf="viewBtnValidar == false" class="btn waves-effect waves-light" disabled>Buscar</a>
+                <a *ngIf="viewBtnValidar == true" class="btn waves-effect waves-light" (click)="buscarFolio()">Buscar</a>
+              </div>
+              <div class="row">
+                <div class="progress" *ngIf="loading"><br><br>
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="test2" class="col s12">
+            <div class="row"><br><br>
+              <ng-container *ngIf="this.user!=undefined">
+                <ng-container *ngIf="this.user.rol.nombre.toUpperCase() == 'ENCARGADO'">
+                  <div class="col s4 offset-s2" id="cambiodetamanio5">
+                    <div class="input-field  col s9 offset-s2" id="cambiodetamanio88">
+                      <div>
+                        <label class="tituloparaformulario active" for="curp" data-error="Error al escribir el Folio">Número de Cita</label>
+                      </div>
+                      <div>
+                        <input numbersOnly autocomplete="off" placeholder="" maxlength="18" id="curp" style="text-transform: uppercase" name="curp" type="text" class="form-control" [(ngModel)]="folio" style="text-transform:uppercase;"
+                          (ngModelChange)="validarFolioxDate()" (change)="validarFolioxDate()">
+                      </div>
+
+                     </div>
+                  </div>
+                  <div class="input-field  col s2" id="cambiodetamanio88">
+                     <div>
+                       <label class="tituloparaformulario active" for="date_cita" data-error="Error al escribir el Folio">DÍA DE LA CITA</label>
+
+                     </div>
+                     <div><br>
+                       <input type="date" class="browser-default" id="date_cita" name="date_cita" [(ngModel)]="date_cita" (ngModelChange)="validarFolioxDate()" (change)="validarFolioxDate()">
+
+                     </div>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="this.user.rol.nombre.toUpperCase() == 'OPERADOR'">
+
+                  <div class="col s6 offset-s2" id="cambiodetamanio5">
+                    <div class="input-field  col s9 offset-s2" id="cambiodetamanio88">
+                      <div>
+                        <label class="tituloparaformulario active" for="curp" data-error="Error al escribir el Folio">Número de Cita</label>
+                      </div>
+                      <div>
+                        <input numbersOnly autocomplete="off" placeholder="" maxlength="18" id="curp" style="text-transform: uppercase" name="curp" type="text" class="form-control" [(ngModel)]="folio" style="text-transform:uppercase;"
+                          (ngModelChange)="validarFolioxDate()" (change)="validarFolioxDate()">
+                      </div>
+
+                     </div>
+                  </div>
+
+                </ng-container>
+              </ng-container>
+
+
+
+              <div class="col s2" id="cambiodetamanio522"><br><br>
+                <a *ngIf="viewBtnValidar == false" class="btn waves-effect waves-light" disabled>Buscar</a>
+                <a *ngIf="viewBtnValidar == true" class="btn waves-effect waves-light" (click)="buscarFolioxDate()">Buscar</a>
+              </div>
+              <div class="row">
+                <div class="progress" *ngIf="loading"><br><br>
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader2"><i class="material-icons">portrait</i> Datos de la cita.</div>
+      <div class="row" *ngIf="div2datoscita">
+        <div class="row">
+          <div class="col s10 offset-s1" id="cambiodetamanio5">
+            <div class="col s12"><br><br>
+            </div>
+
+            <ng-container *ngIf="estado_actual_cita!=undefined">
+
+              <div class="col s12" id="cambiodetamanio">
+                <div class="col s12 center-align" id="cambiodetamanio">
+                  <label *ngIf="estado_actual_cita.nombre.toUpperCase()=='PENDIENTE'" class="titulo_general"> CITA PENDIENTE </label>
+                  <label *ngIf="estado_actual_cita.nombre.toUpperCase()=='CON OBSERVACIONES'" class="titulo_general"> CITA ATENDIDA CON OBSERVACIONES </label>
+                  <label *ngIf="estado_actual_cita.nombre.toUpperCase()=='SIN OBSERVACIONES'" class="titulo_general"> CITA ATENDIDA SIN OBSERVACIONES </label>
+                </div>
+              </div>
+
+              <div class="col s12" id="cambiodetamanio"><br>
+              </div>
+
+
+
+             </ng-container>
+
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Folio: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo"> {{this.objCita.folio_general}} </label>
+                  </div>
+                </div>
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Nombre Completo: </label>
+                  </div>
+                  <ng-container *ngIf="this.objCita.tipo_persona == 'F'">
+                    <div class="col s6" id="cambiodetamanio" *ngIf="this.objCita.segundo_apellido == null">
+                      <label class="conseciontitulo"> {{this.objCita.nombre}} {{this.objCita.primer_apellido}} </label>
+                    </div>
+                    <div class="col s6" id="cambiodetamanio" *ngIf="this.objCita.segundo_apellido != null">
+                      <label class="conseciontitulo"> {{this.objCita.nombre}} {{this.objCita.primer_apellido}} {{this.objCita.segundo_apellido}} </label>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="this.objCita.tipo_persona == 'M'">
+                    <div class="col s6" id="cambiodetamanio" *ngIf="this.objCita.razon_social != null">
+                      <label class="conseciontitulo"> {{this.objCita.razon_social}}</label>
+                    </div>
+                  </ng-container>
+
+                </div>
+
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">RFC: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo"> {{this.objCita.rfc}} </label>
+                  </div>
+                </div>
+
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Email: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo" *ngIf="this.objCita!=undefined"> {{this.objCita.email}} </label>
+                  </div>
+                </div>
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Teléfono : </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo" *ngIf="this.objCita!=undefined"> {{this.objCita.telefono}} </label>
+                  </div>
+                </div>
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Día: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo" *ngIf="this.objCita!=undefined">
+                      {{funcioncrearfecha(this.objCita.fecha)}}
+                    </label>
+                  </div>
+                </div>
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Hora: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo"> {{splithora(this.objCita.hora)}} </label>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col s12" id="cambiodetamanio">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Trámite solicitado: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-md-12">
+                        <ng-container *ngIf="estado_actual_cita!=undefined">
+
+                        <ng-container *ngIf="estado_actual_cita.nombre.toUpperCase()=='PENDIENTE'">
+                          <div class="col s12">
+                            <p-dropdown id="inputArea" [options]="tramites" [(ngModel)]="tramiteSeleccionado" filter="true" placeholder="Selecciona un trámite" (onChange)="cambioTramite($event)" [style]="{'width':'100%'}">
+                              <ng-template let-item pTemplate="selectedItem">
+                                <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+                              </ng-template>
+                              <ng-template let-car pTemplate="item">
+                                <div>
+                                  <div>{{car.label}}</div>
+                                </div>
+                              </ng-template>
+                            </p-dropdown>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+
+                      <ng-container *ngIf="estado_actual_cita!=undefined">
+                        <ng-container *ngIf="estado_actual_cita.nombre.toUpperCase()!='PENDIENTE'">
+                            <label class="conseciontitulo"> {{objCita.union_tramite_configuracion.tramite.nombre}} </label>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12"><br>
+                </div>
+                <div class="col s12" id="cambiodetamanio" *ngIf="objCita.tramite_confirmacion!=undefined">
+                  <div class="col s4" id="divresponsivosinright">
+                    <label class="conseciontitulored">Trámite atendido: </label>
+                  </div>
+                  <div class="col s6" id="cambiodetamanio">
+                    <label class="conseciontitulo">  {{objCita.tramite_confirmacion.nombre}}  </label>
+                  </div>
+                </div>
+
+
+                <div class="col s12"><br>
+                </div>
+                <ng-container *ngIf="this.user.rol.nombre.toUpperCase() == 'ENCARGADO'">
+                  <div class="col s12" id="cambiodetamanio" *ngIf="objCita.tramite_confirmacion!=undefined">
+                    <div class="col s4" id="divresponsivosinright">
+                      <label class="conseciontitulored">Atendido por: </label>
+                    </div>
+                    <div class="col s6" id="cambiodetamanio">
+                      <label class="conseciontitulo" *ngIf="objCita.usuario!=undefined">  {{objCita.usuario.nombre}} {{objCita.usuario.primer_apellido}} {{objCita.usuario.segundo_apellido}}  </label>
+                    </div>
+                  </div>
+                </ng-container>
+
+
+
+                <ng-container *ngIf="estado_actual_cita!=undefined">
+                  <ng-container *ngIf="estado_actual_cita.nombre=='PENDIENTE'">
+                    <div class="col s12" id="cambiodetamanio">
+
+                      <div class="row">
+                        <div class="col s10 offset-s1">
+                          <div class="col s6" id="cambiodetamanio1">
+                            <p>
+                              <label>
+                                <input autocomplete="off" id="inputdefault" class="with-gap" name="group1" type="radio" (click)="sinobservaciones()"/>
+                                <span class="buscadores"><label class="buscadores">Sin Observaciones</label></span>
+                              </label>
+                            </p>
+                          </div>
+                          <div class="col s6" id="cambiodetamanio2">
+                            <p>
+                              <label>
+                                <input autocomplete="off" class="with-gap" name="group1" type="radio" (click)="conobservaciones()" />
+                                <span class="buscadores"><label class="buscadores">Con Observaciones</label></span>
+                              </label>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </ng-container>
+                </ng-container>
+
+
+
+                <ng-container *ngIf="estado_actual_cita!=undefined">
+                  <ng-container *ngIf="estado_actual_cita.nombre.toUpperCase()=='CON OBSERVACIONES'">
+                    <div class="col s12"><br><br>
+
+                    <label class="conseciontitulored">Comentario:</label><br><br>
+
+                  <textarea id="comentario" name="comentario" data-length="300" maxlength="300" [(ngModel)]="this.comentario" class="materialize-textarea" disabled></textarea>
+                </div>
+                <div class="col s12"><br><br>
+                  <label class="conseciontitulored">Requisitos Incorrectos:</label><br><br>
+
+                  <ng-container *ngFor="let requisito of requisitosincorrectos">
+                    <div class="col s12">
+
+                      <div class="col s1">
+                       <ng-container *ngIf="requisito.valor">
+                           <i class="material-icons">check_circle</i>
+                        </ng-container>
+                        <ng-container *ngIf="!requisito.valor">
+                            <i class="material-icons">cancel</i>
+                         </ng-container>
+                      </div>
+                      <div class="col s10">
+                        {{requisito.nombre}}
+
+                      </div>
+                    </div>
+                    <div class="ui-g-12"><br></div>
+                  </ng-container>
+                 </div>
+                  <div class="col s12"><br><br>
+                    <label class="conseciontitulored">Requisitos Correctos:</label><br><br>
+
+                    <ng-container *ngFor="let requisito of requisitoscorrectos">
+                      <div class="col s12">
+
+                        <div class="col s1">
+                         <ng-container *ngIf="requisito.valor">
+                             <i class="material-icons">check_circle</i>
+                          </ng-container>
+                          <ng-container *ngIf="!requisito.valor">
+                              <i class="material-icons">cancel</i>
+                           </ng-container>
+                        </div>
+                        <div class="col s10">
+                          {{requisito.nombre}}
+
+                        </div>
+                      </div>
+                      <div class="ui-g-12"><br></div>
+                    </ng-container>
+                   </div>
+
+
+
+              </ng-container>
+            </ng-container>
+
+                <ng-container *ngIf="booleanconobservaciones">
+                  <div class="col s12"><br><br>
+                    <label class="conseciontitulored">Requisitos:</label><br><br>
+
+                    <ng-container *ngFor="let requisito of requisitos">
+                      <div class="ui-g-12"><p-checkbox name="group1" value={{requisito.nombre}} label={{requisito.nombre}} [(ngModel)]="selectedrequisitos" ></p-checkbox></div>
+                      <div class="ui-g-12"><br></div>
+                    </ng-container>
+                   </div>
+
+                  <div class="col s12"><br><br>
+                    <label class="conseciontitulored">Comentario:</label><br><br>
+                    <ng-container *ngIf="tramiteSeleccionado!=undefined">
+                        <textarea id="comentario" name="comentario" data-length="300" maxlength="300" [(ngModel)]="comentario" class="materialize-textarea"></textarea>
+                    </ng-container>
+                     <br><br>
+                  </div>
+
+
+                </ng-container>
+
+
+
+
+                <div class="col s12">
+                  <!--
+                  <div class="col s6">
+                    <ng-container *ngIf="user!=undefined">
+                      <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" style="text-align: center;">
+                        <ng-container *ngIf="tramiteSeleccionado!=undefined">
+                          <button *ngIf="objCita.atendido == false &&  objCita.cancelado == false && loading == false" pButton type="button" label="Cancelar Cita" class="p-button-outlined p-button-danger" (click)="cancelarCita()"></button>
+                        </ng-container>
+                        <ng-container *ngIf="tramiteSeleccionado==undefined">
+                          <button *ngIf="(objCita.atendido == false &&  objCita.cancelado == false) || loading" pButton type="button" label="Cancelar Cita" class="p-button-outlined p-button-danger" disabled></button>
+
+                        </ng-container>
+
+
+                       </div>
+                      <div><br>
+                      </div>
+                    </ng-container>
+                  </div>
+                  -->
+                  <!--
+                  <div class="col s6">
+                    <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" style="text-align: center;">
+                      <ng-container *ngIf="tramiteSeleccionado!=undefined">
+                        <button *ngIf="objCita.atendido == false && objCita.cancelado == false && loading == false" pButton type="button" class="p-button-outlined p-button-success" label="Aplicar Cita" style="margin-right: .25em" (click)="aplicarCita()"></button>
+                      </ng-container>
+                      <ng-container *ngIf="tramiteSeleccionado==undefined">
+                        <button *ngIf="(objCita.atendido == false && objCita.cancelado == false) || loading" pButton type="button" class="p-button-outlined p-button-success" label="Aplicar Cita" style="margin-right: .25em" disabled></button>
+                      </ng-container>
+                     </div>
+                  </div>
+                  -->
+                </div>
+
+
+
+                <ng-container *ngIf="booleansinobservaciones || booleanconobservaciones">
+                  <div class="col s12 center-align"><br><br>
+                    <div class="col s6">
+                      <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" >
+                       <a class="btn waves-effect waves-light blue" icon="pi pi-angle-left" (click)="recargar()">Regresar</a>
+
+                      </div>
+                    </div>
+                    <div class="col s6">
+                         <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" >
+                         <a class="btn waves-effect waves-light" icon="pi pi-angle-left" (click)="aplicarCita()">Atender Cita</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="estado_actual_cita!=undefined">
+                  <ng-container *ngIf="estado_actual_cita.nombre.toUpperCase()=='SIN OBSERVACIONES' || estado_actual_cita.nombre.toUpperCase()=='CON OBSERVACIONES'">
+
+                    <div class="col s12 center-align"><br><br>
+                      <div class="col s12">
+                        <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" >
+                         <a class="btn waves-effect waves-light blue" icon="pi pi-angle-left" (click)="recargar()">Regresar</a>
+
+                        </div>
+                      </div>
+
+
+
+                    </div>
+                  </ng-container>
+                </ng-container>
+
+
+
+              <div class="col s12"><br><br>
+                <div class="progress" *ngIf="loading"><br><br>
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

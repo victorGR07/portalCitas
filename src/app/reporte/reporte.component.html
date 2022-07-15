@@ -1,0 +1,353 @@
+<div class="container"><br>
+  <ul class="collapsible">
+    <li class="listanormal">
+      <div class="collapsible-header valign-wrapper"> </div>
+      <div class="row">
+        <div class="col s10 offset-s1" id="cambiodetamanio">
+          <div class="col s12"><br><br>
+          </div>
+          <div class="col s12" id="cambiodetamanio" >
+            <div class="col s12" id="cambiodetamanio">
+              <label class="descripcionPanel"> Reporte de Citas </label>
+            </div>
+          </div>
+          <div class="col s12"><br><br>
+          </div>
+          <div id="test2" class="col s12">
+            <div class="col s12">
+
+              <div class="col s12" *ngIf="encargado">
+
+                <form [formGroup]="form" (ngSubmit)="verificardatos()">
+                  <div class="row">
+                    <div class="col s6 input-container">
+                      <label for="desde" class="conseciontitulo"> Fecha inicial <span style="color: #4f4f4f; font-size: 10px;"> (mes/dia/año) </span> </label>
+                      <br>
+                      <input type="date" class="browser-default" id="desde" name="desde" formControlName="fecha_inicio">
+                    </div>
+                    <div class="col s6 input-container">
+                      <label for="hasta" class="conseciontitulo"> Fecha limite <span style="color: #4f4f4f; font-size: 10px;"> (mes/dia/año) </span> </label>
+                      <br>
+                      <input type="date" class="browser-default" id="deshastade" name="hasta" formControlName="fecha_fin" (change)="verificarDia()">
+                    </div>
+                  </div>
+
+          				<div class="row">
+                    <div class="col s12 m6 input-container">
+                      <div>
+                        <label for="id_area" class="conseciontitulo"> Usuario </label>
+                        </div>
+                      <div>
+                        <p-dropdown [options]="usuarios" optionLabel="nombrecompleto" [showClear]="true" [style]="{'width':'100%'}" filter="true" formControlName=id_usuario placeholder="Todos"></p-dropdown>
+
+                        </div>
+
+
+
+                      <!--
+
+          						<select id="id_usuario" class="browser-default" formControlName="id_usuario">
+          							<option [value]="-1" selected> Ninguno </option>
+          							<option *ngFor="let usuario of usuarios" [value]="usuario.id"> {{ usuario.nombrecompleto }} </option>
+          						</select>
+                      -->
+
+                    </div>
+
+          					<div class="col s12 m6 input-container">
+          						<label for="id_modulo" class="conseciontitulo"> Trámite </label>
+
+          						<select id="id_tramite" class="browser-default" formControlName="id_tramite">
+          							<option [value]="-1" selected> Todos </option>
+          							<option *ngFor="let tramite of tramites" [value]="tramite.value"> {{ tramite.label }} </option>
+          						</select>
+
+                   			</div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col s12 m6 input-container">
+          						<label for="id_area" class="conseciontitulo"> Tipo de Persona </label>
+
+          						<select id="id_tipo_persona" class="browser-default" formControlName="id_tipo_persona">
+          							<option [value]="-1" selected> Todos </option>
+          							<option *ngFor="let tipo of tipos_personas" [value]="tipo.value"> {{ tipo.nombre }} </option>
+          						</select>
+
+                    </div>
+                    <div class="col s12 m6 input-container">
+          						<label for="id_area" class="conseciontitulo"> Estatus </label>
+
+          						<select id="id_estado" class="browser-default" formControlName="id_estado">
+          							<option [value]="-1" selected> Todos </option>
+          							<option *ngFor="let estado of estados" [value]="estado.id"> {{ estado.nombre }} </option>
+          						</select>
+
+                    </div>
+
+                  </div>
+
+
+
+
+                  <div class="p-col-12">
+                    <div class="p-grid p-text-center">
+                      <div class="input-wrapper">
+                        <div class="p-col-12">
+                          <div class="ui-fluid">
+                            <div class="p-grid">
+                              <div class="p-col-4 p-offset-4">
+                                <button [disabled]="form.invalid" pButton type="submit" label="Buscar" class="btnbusqueda"></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </form>
+
+
+
+
+              </div>
+
+              <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br><br></div>
+
+              <div class="col s12" id="cambiodetamanio" >
+
+              <div class="progress" *ngIf="loading">
+                <div class="indeterminate"></div>
+              </div>
+            </div>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br></div>
+
+              <div class="col s12" id="cambiodetamanio" *ngIf="this.mostrartabla"><br><br>
+                <ng-container *ngIf="arrayCitas!=undefined">
+                  <ng-container *ngIf="arrayCitas.length==0">
+                    <div class="center">
+                      <label class="redTitulo">SIN RESULTADOS.</label><br><br>
+                    </div>
+                    <div class="center"> <br><br>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="arrayCitas.length>0">
+                    <div class="col s12" id="cambiodetamanio" ><br><br>
+                    </div>
+
+                    <div class="col s12" id="cambiodetamanio" >
+                      <div class="col s12" id="cambiodetamanio">
+                        <label class="descripcionPanel"> Citas encontradas. </label>
+                      </div>
+                    </div>
+                    <div class="col s12">
+                    <p-table  #tt [value]="arrayCitas" [paginator]="true" [rows]="10"
+                      [globalFilterFields]="['folio','nombre','telefono','tramite','hora']" [scrollable]="true"  scrollHeight="flex" scrollDirection="both">
+                      <ng-template pTemplate="caption">
+                        <div class="valign-wrapper">
+                          <label class="label-icon" for="search" id="lupasearch"><i class="material-icons">search</i></label>
+                          <input id="inputsearchuser" type="text" pInputText size="35" (input)="tt.filterGlobal($event.target.value, 'contains')"><br>
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th style="width:50px">
+                            <label class="conseciontitulotabla">
+                              Folio
+                            </label>
+                          </th>
+                          <th style="width:100px">
+                            <label class="conseciontitulotabla">
+                              N° Cita
+                            </label>
+                          </th>
+                          <th style="width:400px">
+                            <label class="conseciontitulotabla">
+                              Nombre
+                            </label>
+                          </th>
+                          <th style="width:200px">
+                            <label class="conseciontitulotabla">
+                              Trámite
+                            </label>
+                          </th>
+                          <th style="width:100px">
+                            <label class="conseciontitulotabla">
+                              Tipo de Persona
+                            </label>
+                          </th>
+
+                          <th style="width:150px">
+                            <label class="conseciontitulotabla">
+                              Fecha
+                            </label>
+                          </th>
+                          <th style="width:100px">
+                            <label class="conseciontitulotabla">
+                              Hora
+                            </label>
+                          </th>
+                          <th style="width:300px">
+                            <label class="conseciontitulotabla">
+                              Estatus
+
+                            </label>
+                          </th>
+                             <th style="width:300px">
+                              <label class="conseciontitulotabla">
+                                Comentario
+
+                              </label>
+                            </th>
+                            <!--
+                            <th style="width:300px">
+                              <label class="conseciontitulotabla">
+                                Requisitos Faltantes
+
+                              </label>
+                            </th>
+                            -->
+
+                          <th style="width:200px">
+                            <label class="conseciontitulotabla">
+                              Atendido por
+
+                            </label>
+                          </th>
+                          <th style="width:200px">
+                            <label class="conseciontitulotabla">
+                              Trámite Confirmación
+
+                            </label>
+                          </th>
+
+                          <th style="width:150px">
+                            <label class="conseciontitulotabla">
+                              Teléfono
+                            </label>
+                          </th>
+                          <th style="width:300px">
+                            <label class="conseciontitulotabla">
+                              Correo
+                            </label>
+                          </th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-cita let-columns="columns">
+                        <tr>
+                          <td style="width:50px">
+                            <label class="conseciondatos"> {{cita.folio}}</label>
+                          </td>
+                          <td style="width:100px">
+                            <label class="conseciondatos"> {{cita.numero_cita}}</label>
+                          </td>
+                          <td style="width:400px">
+                            <label class="conseciondatos"> {{cita.nombre}}</label>
+                          </td>
+                          <td style="width:200px">
+                            <label class="conseciondatos"> {{cita.tramite}}</label>
+                          </td>
+                          <td style="width:100px">
+                            <label class="conseciondatos"> {{cita.tipo_persona}}</label>
+                          </td>
+
+                          <td style="width:150px">
+                            <label class="conseciondatos"> {{cita.fecha}}</label>
+                          </td>
+                          <td style="width:100px">
+                            <label class="conseciondatos"> {{cita.hora}}</label>
+                          </td>
+                          <td style="width:300px">
+                            <label class="conseciondatos">
+                              {{cita.estado}}
+
+                            </label>
+                          </td>
+
+                             <td style="width:300px">
+                              <label class="conseciondatos">
+                                {{cita.observacion}}
+
+                              </label>
+                            </td>
+                            <!--
+                            <td style="width:300px">
+                              <ng-container *ngIf="cita.documentacionfaltante.length>0">
+                                 <ng-container *ngFor="let documento of cita.documentacionfaltante">
+                                   <ng-container *ngIf="!documento.valor">
+                                     <label class="conseciondatos">
+
+                                     * {{documento.nombre}}
+                                   </label><br>
+
+                                   </ng-container>
+                                 </ng-container>
+
+
+                              </ng-container>
+                              <ng-container *ngIf="cita.documentacionfaltante.length==0">
+                                <label class="conseciondatos">
+
+
+                                </label>
+                              </ng-container>
+
+                            </td>
+                            -->
+
+                          <td style="width:200px">
+                            <label class="conseciondatos">
+                              {{cita.usuario}}
+
+                            </label>
+                          </td>
+                          <td style="width:200px">
+                            <label class="conseciondatos">
+                              {{cita.nombretramiteconfirmacion}}
+
+                            </label>
+                          </td>
+                          <td style="width:150px">
+                            <label class="conseciondatos"> {{cita.telefono}}</label>
+                          </td>
+                          <td style="width:300px">
+                            <label class="conseciondatos"> {{cita.email}}</label>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+
+                    <div class="col s12"> <br><br>
+                    </div>
+
+                    <div class="col s12" *ngIf="mostrartabla">
+                      <div class="ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix" style="text-align: center;">
+                           <button pButton type="button" class="p-button-outlined p-button-success" label="Descargar Reporte" style="margin-right: .25em" (click)="descargarReporte()"></button>
+
+                       </div>
+                    </div>
+
+                  </ng-container>
+                </ng-container>
+
+
+              </div>
+
+            </div>
+            <div class="col s12"><br><br>
+            </div>
+
+
+            <div class="col s12"><br><br>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

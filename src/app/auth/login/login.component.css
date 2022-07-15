@@ -1,0 +1,116 @@
+.login-body {
+  background-size: auto;
+    background-size: cover;
+    height: auto;
+    min-height: 100vh;
+}
+
+.login-body .login-panel {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding-top: 70px !important;
+    margin-top: 60px !important;
+}
+
+.formLabel{
+  font-family: fuenteparatitulos;
+
+  font-size: 18px;
+  color: #000;
+}
+
+form{
+  width: 100% !important;
+
+}
+
+p-password{
+  width: 100% !important;
+
+}
+.imagen-eslogan {
+  width: 100%;
+}
+
+.tituloSistemaSemovi{
+  font-size: 30px;
+  color: #71797a !important;
+    font-family: fuenteparatitulos;
+}
+
+.versionado {
+  margin-left: 10px;
+  text-transform: none;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: fuenteparacuerpo;
+  color: #71797a !important;
+
+}
+.card {
+  border-radius: 20px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.74);
+  -moz-box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.74);
+  box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.74);
+}
+
+.input-wrapper{
+  width: 100% !important;
+}
+
+.border{
+  border-bottom: 8px solid #dee4e9;
+}
+
+ input {
+    width: 100%;
+}
+
+.p-inputgroup-addon{
+  background: #fff;
+color: #495057;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-bottom: 1px solid #fff;
+}
+
+.p-inputgroup{
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+
+}
+
+.p-nogutter {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.layout-footer {
+  margin-top: 15px;
+ padding:1rem;
+ font-size:1rem;
+ background-color:var(--surface-a);
+ display:flex;
+ align-items:center;
+ justify-content:space-between
+}
+@media screen and (max-width: 780px) {
+  .login-body {
+    background-size: auto;
+      background-size: cover;
+      height: auto;
+      min-height: 100vh;
+      padding-top: 70px;
+      margin-top: -140px !important;
+      margin-left: -20% !important;
+  }
+
+  .login-body .login-panel {
+      width: 100%;
+      margin: 0 auto;
+      background-color: #ffffff;
+  }
+
+}

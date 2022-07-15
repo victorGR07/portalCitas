@@ -1,0 +1,69 @@
+
+
+.titulocolor{
+  color: #8D3B88;
+  font-size: 20px !important;
+  font-weight: bold;
+
+}
+
+.selectdias{
+  margin-top: -4px !important;
+}
+
+.label{
+  color: #000000 !important;
+
+}
+
+.span{
+  color: #000000 !important;
+
+}
+
+
+.conseciontitulo{
+  font-size: 18px;
+  color: #000000;
+  font-family: fuenteparatitulos;
+ }
+
+label {
+  font-size: 16px !important;
+  color: #000000 !important;
+}
+#btncerrar{
+  background-color: #e57373 !important;
+  color: #000000 !important;
+}
+.cambioinput{
+  font-size: 16px !important;
+  color: #000000 !important;
+}
+
+.ui-multiselect-label-container{
+  font-size: 16px !important;
+  color: #000000 !important;
+}
+
+.ng-star-inserted{
+  font-size: 16px !important;
+  color: #000000 !important;
+}
+
+.datoscuestionario{
+  font-size: 20px !important;
+  color: #000000;
+}
+
+.datoscuestionario2{
+  font-size: 14px !important;
+  color: #000000;
+  font-weight: normal !important;
+
+}
+.collapsible-header{
+  background-color: #F1F1F1;
+  font-size: 22px;
+  font-weight: bold;
+}

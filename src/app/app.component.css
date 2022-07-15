@@ -1,0 +1,114 @@
+.custom .ui-scrollpanel-wrapper {
+    border-right: 9px solid #f4f4f4 !important;
+}
+
+.cssversion {
+  margin-left: 20px;
+  color: #000;
+  font-size: 26px;
+  font-family: fuenteparatitulos;
+}
+
+.custom .ui-scrollpanel-bar {
+    background-color: #1976d2 !important ;
+    opacity: 1 !important;
+    transition: background-color .3s !important;
+}
+
+.custom .ui-scrollpanel-bar:hover {
+    background-color: #135ba1 ;
+}
+
+.ui-scrollpanel ui-widget ui-widget-content ui-corner-all{
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+nav {
+    background-color: #FFFFFF;
+       height: 60px;
+}
+
+.sidenav-overlay {
+    display: block;
+    opacity: 1;
+}
+.linklogout{
+  font-size: 18px;
+  color: #000000;
+}
+
+.linklogin{
+  font-size: 18px;
+  color: #000000;
+}
+
+.dropdown-trigger{
+  font-size: 18px;
+  color: #000000;
+}
+
+.white-text {
+    color: #000 !important;
+}
+
+#logosemovi2{
+    display: none;
+ }
+
+
+nav ul a {
+    color: #000;
+}
+#labeltitulo{
+  font-size: 20px;
+  color: #e91e63;
+}
+
+.nombreusuario{
+  font-size: 18px;
+  color: #000000;
+}
+
+#logosemovi{
+  width: 300px;
+   padding: 1 .0rem;
+   height: 30px;
+margin-top: 14px !important;
+margin-left: 10px !important;
+}
+
+
+
+@media screen and (max-width: 980px) {
+  nav {
+    height: 60px;
+  }
+
+  nav a {
+    color: #000;
+  }
+
+  .br {
+      background-color: #FFF;
+  }
+
+  #logosemovi{
+    width: 280px;
+
+      display: block;
+ }
+
+ .encabezadosprocesos{
+     font-size: 18px;
+ }
+
+ #logosemovi2{
+   width: 140px;
+   height: 60px;
+   padding-left: -28px;
+
+     display: block;
+ }
+
+}

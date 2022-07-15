@@ -1,0 +1,657 @@
+<div class="container"><br>
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader1">Centro de Usuarios.</div>
+      <div class="row">
+        <div class="row">
+          <div class="row"><br><br>
+            <div class="col s12"><br><br>
+              <div class="col s10 offset-s1" id="divBusquedaOpciones" *ngIf="mostrarListadoUsuarios"><br><br>
+                <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br><br></div>
+
+                <div class="col s12" id="cambiodetamanio" >
+
+                <div class="progress" *ngIf="loading">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+              <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br></div>
+                <p-table #tt [value]="usuarios" [paginator]="true" [rows]="10" [globalFilterFields]="['nombrecompleto']" [responsive]="true">
+                  <ng-template pTemplate="caption">
+                    <div class="col s8" id="cambiodetamanio11">
+                      <div class="col s6">
+                        <div class="tooltip">
+                          <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-info p-button-outlined" (click)="verCrearUsuario()"></button>
+                          <span class="tooltiptext">Registrar Usuario Nuevo</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s4" id="cambiodetamanio11">
+                      <div class="valign-wrapper">
+                        <label class="label-icon" for="search" id="lupasearch"><i class="material-icons">search</i></label>
+                        <input id="inputsearchuser" type="text" pInputText size="50" (input)="tt.filterGlobal($event.target.value, 'contains')"><br>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width:30%">
+                        <div><label class="tablatitulo">Nombre</label></div>
+                      </th>
+                      <th style="width:15%">
+                        <div class="center-align"><label class="tablatitulo">Rol</label></div>
+                      </th>
+                      <th style="width:12%">
+                        <div><label class="tablatitulo">Estado</label></div>
+                      </th>
+                      <th style="width:20%">
+                        <div><label class="tablatitulo">Bloqueado</label></div>
+                      </th>
+
+                      <th style="width:20%">
+                        <div class="center-align"><label class="tablatitulo"> Opciones </label></div>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-usuario>
+                    <tr>
+                      <td>
+                        <div class="sinsalirse">
+                          <label class="tablacontent">
+                            {{usuario.nombre}} {{usuario.primer_apellido}}
+                            <ng-container *ngIf="usuario.segundo_apellido!=null">
+                              {{usuario.segundo_apellido}}
+                            </ng-container>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="sinsalirse center-align">
+                          <label class="tablacontent center-align">
+                            <ng-container *ngIf="usuario.rol!=undefined">
+                              {{usuario.rol.nombre}}
+                            </ng-container>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="tooltip">
+                          <div class="sinsalirse center-align">
+                            <label class="tablacontent center-align">
+                              <ng-container *ngIf="usuario.estatus">
+                                <button pButton type="button" label="Activo" class="p-button-outlined p-button-success tooltipped" (click)="abrirmodalcambioestatus(usuario)"></button>
+                              </ng-container>
+                              <ng-container *ngIf="!usuario.estatus">
+                                <button pButton type="button" label="Inactivo" class="p-button-outlined p-button-danger tooltipped" (click)="abrirmodalcambioestatus(usuario)"></button>
+                              </ng-container>
+                            </label>
+                          </div>
+                          <span class="tooltiptext">Cambiar</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="tooltip">
+                          <div class="sinsalirse center-align">
+                            <label class="tablacontent center-align">
+                              <ng-container *ngIf="usuario.bloqueado">
+                                <button pButton type="button" label="Si" class="p-button-outlined p-button-danger tooltipped" (click)="abrirmodalcambiobloqueado(usuario)"></button>
+                              </ng-container>
+                              <ng-container *ngIf="!usuario.bloqueado">
+                                <button pButton type="button" label="No" class="p-button-outlined p-button-success tooltipped" (click)="abrirmodalcambiobloqueado(usuario)"></button>
+                              </ng-container>
+                            </label>
+                          </div>
+                          <span class="tooltiptext">Cambiar</span>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="sinsalirse center-align">
+                          <div class="col s12">
+                            <div class="col s4" *ngIf="!usuario.bloqueado">
+                              <div class="tooltip">
+                                <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info p-button-outlined" (click)="asignarusuarioedicion(usuario)"></button>
+                                <span class="tooltiptext">Editar Usuario</span>
+                              </div>
+                            </div>
+                            <div class="col s4" *ngIf="usuario.bloqueado">
+                            </div>
+                            <div class="col s4" *ngIf="usuario.bloqueado">
+                            </div>
+                            <div class="col s4" *ngIf="!usuario.bloqueado">
+                              <div class="tooltip">
+                                <button pButton pRipple type="button" icon="pi pi-id-card" class="p-button-rounded p-button-info p-button-outlined" (click)="verinformacion(usuario)"></button>
+                                <span class="tooltiptext">Ver Información</span>
+                              </div>
+                            </div>
+                            <div class="col s4" *ngIf="!usuario.bloqueado">
+                              <div class="tooltip">
+                                <button pButton pRipple type="button" icon="pi pi-sync" class="p-button-rounded p-button-info p-button-outlined" (click)="reestablecercontrasenia(usuario)"></button>
+                                <span class="tooltiptext">Cambiar <br> contraseña</span>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+              <div class="col s10 offset-s1" id="divBusquedaOpciones" *ngIf="mostrarCrearUsuario"><br><br>
+                <div class="col s12">
+                  <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-text" (click)="regresar()"></button>
+                  <label class="tituloGeneral">CREAR USUARIO NUEVO<br><br></label>
+                </div>
+                <div class="col s12" id="cambiodetamanio" >
+
+                <div class="progress" *ngIf="loading">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+                <div class="col s12">
+                  <form [formGroup]="form" (ngSubmit)="submit($event)" autocomplete="off" class="form-auth">
+                    <div class="row">
+                      <div class="col s12">
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Nombre (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=nombre type="text" style="text-transform: uppercase" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Primer Apellido (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=primer_apellido style="text-transform: uppercase" type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Segundo Apellido </label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=segundo_apellido style="text-transform: uppercase" type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Correo Electrónico (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=correoelectronico type="text" (blur)="comprobarCorreo()" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">CURP (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=curp type="text" style="text-transform: uppercase"  pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Rol (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <div class="ui-grid ui-grid-responsive ui-fluid responsive">
+                                          <div class="ui-grid-row">
+                                            <div class="ui-grid-col-12">
+                                              <p-dropdown [options]="roles" [style]="{ 'min-width': '100%'}" formControlName=rol optionLabel="nombre" [filter]="true" filterBy="nombre" [style]="{'minWidth':'100%'}" placeholder="Selecciona un Rol">
+                                                <ng-template let-rol pTemplate="item">
+                                                  <div class="rol-item">
+                                                    <div>{{ rol.nombre}}</div>
+                                                  </div>
+                                                </ng-template>
+                                              </p-dropdown>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Contraseña (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=password type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        -->
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="form.invalid">
+                      <div class="col s12" id="cambiodetamanio11">
+                        <div class="col s10 offset-s1" id="cambiodetamanio11">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s12" id="cambiodetamanio11">
+
+                        <ng-container *ngIf="correorepetido">
+                          <div class="col s10 offset-s1" id="cambiodetamanio11">
+
+                            <div class="msg msg-error z-depth-3 scale-transition"> Correo Repetido. </div>
+                          </div>
+                        </ng-container>
+                        <div class="col s10 offset-s1" id="cambiodetamanio11" *ngIf="this.verificarerrores">
+                          <ng-container>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getNombre.invalid || this.getPrimerApellido.invalid || this.getSegundoApellido.invalid"> Favor de rellenar los datos faltantes . </div>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getCorreo.invalid"> Favor de escribir correctamente el correo electrónico. </div>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getCurp.invalid"> Favor de escribir correctamente la CURP de la persona. </div>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getRole.invalid"> Favor de seleccionar el rol correspondiente. </div>
+
+
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-col-12">
+                      <div class="p-grid p-text-center">
+                        <div class="input-wrapper">
+                          <div class="p-col-12">
+                            <div class="ui-fluid">
+                              <div class="p-grid">
+                                <div class="p-col-4 p-offset-4">
+                                  <ng-container *ngIf="correorepetido || loading">
+                                    <button pButton label="Crear Usuario" disabled></button>
+                                  </ng-container>
+                                  <ng-container *ngIf="!correorepetido && loading == false">
+                                    <button pButton type="submit" label="Crear Usuario"></button>
+                                  </ng-container>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col s10 offset-s1" id="divBusquedaOpciones" *ngIf="mostrarActualizarUsuario"><br><br>
+                <div class="col s12">
+                  <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-text" (click)="regresar()"></button>
+                  <label class="tituloGeneral">ACTUALIZAR USUARIO NUEVO<br><br></label>
+                </div>
+                <div class="col s12" id="cambiodetamanio" >
+
+                <div class="progress" *ngIf="loading">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+                <div class="col s12">
+                  <form [formGroup]="formActualizar" (ngSubmit)="submitEdicion($event)" autocomplete="off" class="form-auth">
+                    <div class="row">
+                      <div class="col s12">
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Nombre (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=nombre type="text" style="text-transform: uppercase" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Primer Apellido (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=primer_apellido style="text-transform: uppercase" type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Segundo Apellido </label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=segundo_apellido style="text-transform: uppercase" type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Correo Electrónico (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=correoelectronico type="text" (blur)="comprobarCorreoEdicion()" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">CURP (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=curp type="text" style="text-transform: uppercase" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Rol (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <div class="ui-grid ui-grid-responsive ui-fluid responsive">
+                                          <div class="ui-grid-row">
+                                            <div class="ui-grid-col-12">
+                                              <p-dropdown [options]="roles" [style]="{ 'min-width': '100%'}" formControlName=rol optionLabel="nombre" [filter]="true" filterBy="nombre" [style]="{'minWidth':'100%'}" placeholder="Selecciona un Rol">
+                                                <ng-template let-rol pTemplate="item">
+                                                  <div class="rol-item">
+                                                    <div>{{ rol.nombre}}</div>
+                                                  </div>
+                                                </ng-template>
+                                              </p-dropdown>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--
+                        <div class="col s6">
+                          <div class="p-grid">
+                            <div class="input-wrapper">
+                              <div class="p-col-8">
+                                <div class="p-col-12 ">
+                                  <label class="formLabel left-align">Contraseña (*)</label>
+                                </div>
+                                <div class="ui-fluid">
+                                  <div class="p-grid p-fluid">
+                                    <div class="p-col">
+                                      <div class="p-inputgroup">
+                                        <input formControlName=password type="text" pInputText>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        -->
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s12" id="cambiodetamanio11">
+                        <ng-container *ngIf="curprepetido">
+                          <div class="col s10 offset-s1" id="cambiodetamanio11">
+                            <div class="msg msg-error z-depth-3 scale-transition"> CURP Repetido. </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="correorepetido">
+                          <div class="col s10 offset-s1" id="cambiodetamanio11">
+                            <div class="msg msg-error z-depth-3 scale-transition"> Correo Repetido. </div>
+                          </div>
+                        </ng-container>
+                        <div class="col s10 offset-s1" id="cambiodetamanio11" *ngIf="this.verificarerrores">
+                          <ng-container>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getNombreEdicion.invalid || this.getPrimerApellidoEdicion.invalid || this.getSegundoApellidoEdicion.invalid"> Favor de rellenar los datos faltantes . </div>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getCorreoEdicion.invalid"> Favor de escribir correctamente el correo electrónico. </div>
+                            <div class="msg msg-error z-depth-3 scale-transition" *ngIf="this.getRoleEdicion.invalid"> Favor de seleccionar el rol correspondiente . </div>
+
+
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s12" id="cambiodetamanio11">
+                        <div class="col s10 offset-s1" id="cambiodetamanio11">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-col-12">
+                      <div class="p-grid p-text-center">
+                        <div class="input-wrapper">
+                          <div class="p-col-12">
+                            <div class="ui-fluid">
+                              <div class="p-grid">
+                                <div class="p-col-4 p-offset-4">
+                                  <div class="p-col-4 p-offset-4">
+                                    <ng-container *ngIf="curprepetido || correorepetido || loading">
+                                      <button pButton label="Actualizar Usuario" disabled></button>
+                                    </ng-container>
+                                    <ng-container *ngIf="!curprepetido && !correorepetido && loading == false">
+                                      <button pButton type="submit" label="Actualizar Usuario"></button>
+                                    </ng-container>
+                                   </div>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<p-dialog   [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false">
+  <div class="row">
+    <div class="col s12" *ngIf="this.usuarioinfo!=undefined">
+      <div class="col s12">
+        <p-fieldset legend="Información del usuario">
+          <label class="conseciontitulo">Nombre</label>
+          <p>
+            {{usuarioinfo.nombre}} {{usuarioinfo.primer_apellido}}
+            <ng-container *ngIf="usuarioinfo.segundo_apellido!=null">
+              {{usuarioinfo.segundo_apellido}}
+            </ng-container>
+          </p>
+          <label class="conseciontitulo">Correo</label>
+          <p>
+            {{usuarioinfo.correo}}
+          </p>
+          <label class="conseciontitulo">Rol</label>
+          <p>
+            <ng-container *ngIf="usuarioinfo.rol!=null">
+              {{usuarioinfo.rol.nombre}}
+            </ng-container>
+          </p>
+
+          <label class="conseciontitulo">CURP</label>
+          <p>
+            <ng-container *ngIf="usuarioinfo.curp!=null">
+              {{usuarioinfo.curp}}
+            </ng-container>
+          </p>
+
+          <label class="conseciontitulo">Fecha de Creación</label>
+          <p *ngIf="usuarioinfo!=undefined">
+            {{funcioncrearfecha(usuarioinfo.created_at)}}
+          </p>
+          <label class="conseciontitulo">Bloqueo</label>
+          <p>
+            <ng-container *ngIf="usuarioinfo.bloqueado">
+              Si
+            </ng-container>
+            <ng-container *ngIf="!usuarioinfo.bloqueado">
+              No
+            </ng-container>
+          </p>
+          <label class="conseciontitulo">Estado General</label>
+          <p>
+            <ng-container *ngIf="usuarioinfo.estatus">
+              Activo
+            </ng-container>
+            <ng-container *ngIf="!usuarioinfo.estatus">
+              Inactivo
+            </ng-container>
+          </p>
+        </p-fieldset><br><br>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog><br>

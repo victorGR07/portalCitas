@@ -1,0 +1,73 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.eye{
+ position:absolute;
+ height:600px;
+ width:600px;
+ z-index: 1;
+}
+
+.heaven
+{
+ position:absolute;
+ height:600px;
+ width:600px;
+ z-index: -1;
+}
+
+html {
+    font-size: 15px;
+    background-color: #FFF;
+}
+
+#center {
+  text-align: center;
+ }
+
+ .cuerpolabel {
+   font-size: 23px;
+   color: #000;
+
+  }
+
+  .cuerpolabelcategorias{
+    font-size: 23px;
+    color: #000;
+    font-weight: bold;
+
+  }
+
+  .qrcode{
+    justify-content: center;
+
+  }
+
+#titulocentrado {
+    font-size: 25px;
+    color: #000;
+}
+
+.qrcode {
+  height: 150px;
+  left: 50px;
+  position: relative;
+  top: -50px;
+  width: 150px;
+}
+
+.tp-form {
+   min-width: 150px;
+   max-width: 500px;
+   width: 100%;
+}
+.tp-full-width {
+   width: 100%;
+}

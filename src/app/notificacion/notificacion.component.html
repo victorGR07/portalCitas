@@ -1,0 +1,194 @@
+<div class="container"><br>
+  <ul class="collapsible">
+    <li class="listanormal">
+      <div class="collapsible-header valign-wrapper"> </div>
+      <div class="row">
+        <div class="col s10 offset-s1" id="cambiodetamanio">
+          <div class="col s12"><br><br>
+          </div>
+
+          <ng-container *ngIf="mostrarListadoNotificacion">
+
+            <div class="col s12" id="cambiodetamanio"><br><br>
+              <ng-container *ngIf="notificaciones!=undefined">
+                <ng-container >
+                  <div class="col s12" id="cambiodetamanio" >
+                    <div class="col s12" id="cambiodetamanio">
+                      <label class="descripcionPanel"> NOTIFICACIONES </label>
+                    </div>
+                  </div>
+                  <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br><br></div>
+
+                  <div class="col s12" id="cambiodetamanio" >
+
+                  <div class="progress" *ngIf="loading">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+                <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br></div>
+
+                   <div class="col s12" id="cambiodetamanio" >
+                    <p-table  #tt [value]="notificaciones" [paginator]="true" [rows]="10"
+                      [globalFilterFields]="['mensaje','fecha']" [responsive]="true">
+                      <ng-template pTemplate="caption">
+                        <div class="col s8" id="cambiodetamanio11">
+                          <div class="col s6">
+                            <div class="tooltip">
+                              <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-info p-button-outlined" (click)="verCrearNotificacion()"></button>
+                              <span class="tooltiptext">Crear nueva notificación</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4" id="cambiodetamanio11">
+                          <div class="valign-wrapper">
+                            <label class="label-icon" for="search" id="lupasearch"><i class="material-icons">search</i></label>
+                            <input id="inputsearchuser" type="text" pInputText size="35" (input)="tt.filterGlobal($event.target.value, 'contains')"><br>
+                          </div>
+                        </div>
+
+
+                      </ng-template>
+                      <ng-template pTemplate="header" let-columns let index>
+                        <tr>
+
+                          <th style="width:60%">
+                            <label class="conseciontitulo">
+                              Mensaje
+                            </label>
+                          </th>
+                          <th style="width:30%">
+                            <label class="conseciontitulo">
+                              Fecha
+                            </label>
+                          </th>
+
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-notificacion let-columns="columns" let-i="rowIndex">
+                        <tr>
+
+                          <td>
+                            <label class="conseciondatos" (click)="mostrarmodalmensaje(notificacion.mensaje)"> {{this.cortarString(notificacion.mensaje,20)}}</label>
+                          </td>
+                          <td>
+                            <label class="conseciondatos"> {{notificacion.fecha}}</label>
+                          </td>
+
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+
+
+                </ng-container>
+
+              </ng-container>
+
+
+
+            </div>
+            <div class="col s12"><br><br>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="mostrarCrearNotificacion">
+            <div class="col s12" id="cambiodetamanio" >
+              <div class="col s12">
+                <button pButton pRipple type="button" icon="pi pi-arrow-left" class="p-button-rounded p-button-text" (click)="regresar()"></button>
+                <label class="tituloGeneral">Regresar al Listado<br><br></label>
+              </div>
+                  <div class="col s12"><br></div>
+
+                  <div class="col s12" id="cambiodetamanio" >
+                    <div class="col s12" id="cambiodetamanio">
+                      <label class="descripcionPanel"> Crear Nueva notificación </label>
+                    </div>
+                  </div>
+                  <div class="col s12" id="cambiodetamanio">
+                    <div class="col s12">
+                      <label class="conseciontitulored">Día: </label>
+                    </div>
+                    <div class="col s6" id="cambiodetamanio">
+                      <input type="date" class="browser-default" id="fecha_notificacion" name="fecha_notificacion" [(ngModel)]="fecha_notificacion" (change)="validarFecha()">
+
+                    </div>
+                  </div>
+
+                  <div class="col s12"><br></div>
+                  <div class="col s12" id="cambiodetamanio">
+                    <div class="col s12" >
+                      <label class="conseciontitulored">Comentario: </label>
+                    </div>
+                    <div class="col s12" id="cambiodetamanio">
+                      <textarea id="comentario" name="comentario" data-length="300" maxlength="300" [(ngModel)]="comentario" class="materialize-textarea"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br><br></div>
+
+                  <div class="col s12" id="cambiodetamanio" >
+
+                  <div class="progress" *ngIf="loading">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+                <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br></div>
+
+                  <div class="col s12"><br></div>
+                  <a *ngIf="comentario!=undefined && (comentario!=undefined && comentario.trim().length>0) && fecha_notificacion!=undefined && loading == false" class="btn waves-effect waves-light" (click)="enviarNotificacion()">Enviar Notificación</a>
+                  <a *ngIf="comentario==undefined || (comentario!=undefined && comentario.trim().length==0) || fecha_notificacion == undefined || loading" class="btn waves-effect waves-light" disabled>Enviar Notificación</a>
+
+                  <div class="col s12"><br></div>
+
+            </div>
+          </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+
+<div id="modalvermensaje" class="modal">
+  <div class="modal-content" >
+    <div class="card">
+          <div class="row"><br>
+            <div class="col s10  offset-s1"><br>
+              <div class="col s12" id="cambiodetamanio">
+                <div>
+                  <label class="conseciontitulo">Mensaje</label>
+                </div>
+                <div *ngIf="mensajeseleccionado!=undefined">
+                  <div class="col s12 sinsalirse" id="cambioenmob1" >
+                     {{mensajeseleccionado}}
+                  </div>
+                 </div>
+              </div>
+              <div class="col s12">
+                <div class="row" ><br>
+                  <div class="row">
+                    <div class="input-field col s12" id="cambiodetamanio9">
+                      <div class="input-field col s12 center-align" id="cambiodetamanio11"  >
+                        <a  id="btncerrar" class="btn modal-close waves-effect waves-light">Salir</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

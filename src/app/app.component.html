@@ -1,0 +1,58 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<nav id="navesconder">
+  <div class="nav-wrapper">
+    <div class="row">
+      <a href="#" data-target="slide-out" class="sidenav-trigger"  *ngIf="loged"><i class="material-icons">menu</i></a>
+      <a>
+        <label class="cssversion">Proveedores</label>
+
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" *ngIf="loged">
+         <li *ngIf="loged && (encargado)" ><a  href="/usuarios">Usuarios</a></li>
+         <li *ngIf="loged && (encargado)" ><a  href="/notificaciones">Notificaciones</a></li>
+
+          <li *ngIf="loged && (encargado || operador)" ><a href="/verificar">Verificar</a></li>
+          <li *ngIf="loged && (encargado || operador)" ><a *ngIf="loged" href="/reporte">Reporte</a></li>
+
+         <li *ngIf="loged && (encargado)" ><a href="/configuracion">Configuración</a></li>
+
+        <li>
+          <a class="dropdown-trigger" data-target="dropdown1" *ngIf="user!=undefined">
+            <label class="nombreusuario" *ngIf="loged">{{user.nombre}} {{user.primer_apellido}}
+              <ng-container *ngIf="user.segundo_apellido!=undefined">
+                {{user.segundo_apellido}}
+              </ng-container>
+
+            </label>
+            <i class="material-icons right" *ngIf="loged">arrow_drop_down</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ul id="slide-out" class="sidenav" *ngIf="loged">
+  <li><div class="user-view">
+    <a href="#email"><span class="white-text email"><label class="nombreusuario" *ngIf="loged && user!=undefined">{{user.nombre}} {{user.primer_apellido}} {{user.segundo_apellido}}</label></span></a>
+  </div></li>
+  <li><div class="divider"></div></li>
+  <li *ngIf="loged && (encargado)" ><a  href="/usuarios">Usuarios</a></li>
+  <li *ngIf="loged && (encargado)" ><a  href="/notificaciones">Notificaciones</a></li>
+
+  <li *ngIf="loged && (encargado || operador)" ><a *ngIf="loged" href="/reporte">Reporte</a></li>
+  <li *ngIf="loged && (operador)" ><a href="/verificar">Verificar</a></li>
+  <li *ngIf="loged && (encargado)" ><a href="/configuracion">Configuración</a></li>
+
+
+ <li><div class="divider" *ngIf="loged"></div></li>
+
+   <li><a class="waves-effect" (click)="logout()"><i class="material-icons left">exit_to_app</i>Cerrar sesión</a></li>
+</ul>
+<ul id="dropdown1" class="dropdown-content" *ngIf="loged">
+  <li><div class="divider"></div></li>
+  <li><a href="/resetpassword" class="waves-effect" *ngIf="loged"><i class="material-icons left" >compare_arrows</i> Cambiar contraseña</a></li>
+
+   <li><a (click)="logout()"><i class="material-icons left">exit_to_app</i><label *ngIf="loged" class="nombreusuario">Cerrar sesión</label></a></li>
+</ul>
+<router-outlet></router-outlet>
+<br><br><br><br>

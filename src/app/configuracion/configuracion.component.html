@@ -1,0 +1,1731 @@
+<div class="container"><br>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s10 offset-s1" id="divBusquedaOpciones"><br><br>
+          <ul class="tabs">
+            <li class="tab col s4"><a href="#test1"><label>Trámites</label></a></li>
+            <li class="tab col s4"><a href="#test5"><label>Días</label></a></li>
+            <li class="tab col s4"><a href="#test2"><label>Recomendaciones</label></a></li>
+
+          </ul>
+        </div> <br><br><br>
+        <div id="test1" class="col s12">
+          <div class="row"><br><br><br>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br><br></div>
+            <div class="col s12" id="cambiodetamanio">
+              <div class="progress" *ngIf="loading">
+                <div class="indeterminate"></div>
+              </div>
+            </div>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br></div>
+            <div class="col s12"><br><br>
+              <p-table [value]="tramites" [columns]="cols" [reorderableColumns]="true" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,30,40,50,60]">
+                <ng-template pTemplate="caption">
+                  <div class="col s12">
+                    <div class="col s8" id="div12responsive">
+                      <div class="col s2">
+                        <div class="valign-wrapper">
+                          <div class="col s1 offset-s1" id="cambioenmob1">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom" (click)="inicializarDias()"><i class="material-icons">add</i></a>
+                              <span class="tooltiptext">Crear Trámite</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col s2">
+                        <ng-container *ngIf="tramites!=undefined">
+                          <ng-container *ngIf="tramites.length>0">
+                            <div class="valign-wrapper">
+                              <div class="col s1 offset-s1" id="cambioenmob1">
+                                <div class="tooltip">
+                                  <a class="btn-floating" data-position="bottom" (click)="abrirmodalConfiguracioGrobal()"><i class="material-icons">assignment</i></a>
+                                  <span class="tooltiptext">Ver <br> Configuración</span>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                      <div class="col s2">
+                        <ng-container *ngIf="tramites!=undefined">
+                          <ng-container *ngIf="tramites.length>0">
+                            <div class="valign-wrapper">
+                              <div class="col s1 offset-s1" id="cambioenmob1">
+                                <div class="tooltip">
+                                  <a class="btn-floating" data-position="bottom" (click)="abrirEdicionConfiguracionTramiteGrobal()"><i class="material-icons">build</i></a>
+                                  <span class="tooltiptext">Editar <br> Configuración</span>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12"><br>
+                  </div>
+
+
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width:3rem"></th>
+                    <th style="width:5%">
+                      Orden
+                    </th>
+                    <th *ngFor="let col of columns" pReorderableColumn style={{col.style}}>
+                      {{col.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <!--
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width:7%">
+                      <div class="center-align"><label>No°</label></div>
+                    </th>
+                    <th style="width:45%">
+                      <div><label>Nombre</label></div>
+                    </th>
+                    <th style="width:10%">
+                      <div class="center-align"><label>Estado</label></div>
+                    </th>
+                    <th style="width:15%">
+                      <div class="center-align"><label>Opciones</label></div>
+                    </th>
+                  </tr>
+                </ng-template>
+                -->
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+                  <tr [pReorderableRow]="index">
+                    <td>
+                      <span class="pi pi-bars" pReorderableRowHandle></span>
+                    </td>
+                    <td>
+                      <div class="center-align">
+                        {{index+1}}
+                      </div>
+                    </td>
+                    <td>
+                      {{rowData.label}}
+                    </td>
+                    <td>
+                      <div class="tooltip">
+                        <div class="sinsalirse center-align">
+                          <label class="tablacontent center-align">
+                            <ng-container *ngIf="rowData.estatus">
+                              <button pButton type="button" label="Activo" class="p-button-outlined p-button-success tooltipped" (click)="abrirconfirmacioncambio(rowData)"></button>
+                            </ng-container>
+                            <ng-container *ngIf="!rowData.estatus">
+                              <button pButton type="button" label="Inactivo" class="p-button-outlined p-button-danger tooltipped" (click)="abrirconfirmacioncambio(rowData)"></button>
+                            </ng-container>
+                          </label>
+                        </div>
+                        <span class="tooltiptext">Cambiar Estado</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="col s12" *ngIf="rowData.estatus">
+                        <div class="col s12">
+                          <div class="sinsalirse center-align">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom" (click)="abrirEditarTramite(rowData)"><i class="material-icons">edit</i></a>
+                              <span class="tooltiptext">Editar Trámite</span>
+                            </div>
+                          </div>
+                        </div>
+                        <!--
+                        <div class="col s4">
+                          <div class="sinsalirse center-align">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom" (click)="abrirInfoTramite(rowData)"><i class="material-icons">assignment</i></a>
+                              <span class="tooltiptext">Ver <br> Configuración</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col s4">
+                          <div class="sinsalirse center-align">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom" (click)="abrirEdicionConfiguracionTramite(rowData)"><i class="material-icons">build</i></a>
+                              <span class="tooltiptext">Editar <br> Configuración</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        -->
+                      </div>
+
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <ng-container *ngIf="this.tramites!=undefined">
+                <ng-container *ngIf="this.tramites.length>1">
+                  <a id="btnaceptar" class="btn waves-effect waves-light" (click)="guardarodenamiento('3',tramites)">Guardar Ordenamiento</a>
+
+                </ng-container>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div id="test2" class="col s12">
+          <div class="row"><br><br><br>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br><br></div>
+            <div class="col s12" id="cambiodetamanio">
+              <div class="progress" *ngIf="loading">
+                <div class="indeterminate"></div>
+              </div>
+            </div>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br></div>
+            <div class="col s12"><br><br>
+
+              <p-table [value]="recomendaciones" [columns]="colsrecomendaciones" [reorderableColumns]="true" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,30,40,50,60]">
+                <ng-template pTemplate="caption">
+                  <div class="col s12">
+                    <div class="col s8" id="div12responsive">
+                      <div class="col s2">
+                        <div class="valign-wrapper">
+                          <div class="col s1 offset-s1" id="cambioenmob1">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom" (click)="crearRecomendacion()"><i class="material-icons">add</i></a>
+                              <span class="tooltiptext">Crear Recomendación</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="col s12"><br>
+                  </div>
+
+
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width:3rem"></th>
+                    <th style="width:5%">
+                      Orden
+                    </th>
+                    <th *ngFor="let col of columns" pReorderableColumn style={{col.style}}>
+                      {{col.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+                  <tr [pReorderableRow]="index">
+                    <td>
+                      <span class="pi pi-bars" pReorderableRowHandle></span>
+                    </td>
+                    <td>
+                      <div class="center-align">
+                        {{index+1}}
+                      </div>
+                    </td>
+                    <td>
+                      {{rowData.recomendacion}}
+                    </td>
+                    <td>
+
+                      <div class="tooltip">
+                        <div class="sinsalirse center-align">
+                          <label class="tablacontent center-align">
+                            <ng-container *ngIf="rowData.estatus">
+                              <button pButton type="button" label="Activo" class="p-button-outlined p-button-success tooltipped" (click)="dardebajarecomendacion(rowData)"></button>
+                            </ng-container>
+                            <ng-container *ngIf="!rowData.estatus">
+                              <button pButton type="button" label="Inactivo" class="p-button-outlined p-button-danger tooltipped" (click)="dardealtarecomendacion(rowData)"></button>
+                            </ng-container>
+                          </label>
+                        </div>
+                        <span class="tooltiptext">Cambiar</span>
+                      </div>
+
+                      <!--
+                      <ng-container *ngIf="rowData.estatus">
+                        Activo
+                      </ng-container>
+                      <ng-container *ngIf="!rowData.estatus">
+                        Inactivo
+                      </ng-container>
+                      -->
+                    </td>
+
+                  </tr>
+                </ng-template>
+              </p-table>
+
+              <ng-container *ngIf="this.recomendaciones!=undefined">
+                <ng-container *ngIf="this.recomendaciones.length>1">
+                  <a id="btnaceptar" class="btn waves-effect waves-light" (click)="guardarodenamientorecomendaciones()">Guardar Ordenamiento</a>
+
+                </ng-container>
+              </ng-container>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div id="test5" class="col s12">
+          <div class="col s10 offset-s1" id="divBusquedaOpciones"><br><br>
+            <ul class="tabs">
+              <li class="tab col s6"><a href="#test4"><label>Días Bloqueados</label></a></li>
+              <!--
+              <li class="tab col s4"><a href="#test10" (click)="limpiardiasespeciales()"><label>Dias Especiales</label></a></li>
+              -->
+              <li class="tab col s6"><a href="#test11"><label>Límite Calendario</label></a></li>
+            </ul>
+          </div>
+          <div id="test4" class="col s12"><br><br>
+            <div id="test1" class="col s12">
+              <div class="row"><br><br><br>
+                <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br><br></div>
+
+                <div class="col s12" id="cambiodetamanio">
+
+                  <div class="progress" *ngIf="loading">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+                <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br></div>
+                <div class="col s12"><br><br>
+                  <p-table #tt [value]="dias" [paginator]="true" [rows]="10" [globalFilterFields]="['fecha']" [responsive]="true">
+                    <ng-template pTemplate="caption">
+                      <div class="col s8" id="div12responsive">
+                        <div class="col s3">
+                          <div class="valign-wrapper">
+                            <div class="col s1 offset-s1" id="cambioenmob1">
+                              <div class="tooltip">
+                                <a class="btn-floating modal-trigger" data-position="bottom" data-target="modalcreateDay"><i class="material-icons">add</i></a>
+                                <span class="tooltiptext">Crear Día</span>
+                              </div>
+                            </div> <br><br>
+                          </div> <br>
+                        </div>
+                        <div class="col s1 offset-s1" id="cambioenmob4" *ngIf="diaseleccionado!=undefined && diaseleccionado.deprecated == false">
+                          <div class="tooltip">
+                            <a class="btn-floating tooltipped" data-position="bottom" data-tooltip="Desactivar usuario"><i class="material-icons">remove</i></a>
+                            <span class="tooltiptext">Habilitar día</span>
+                          </div>
+                        </div>
+                        <div class="col s1 offset-s1" id="cambioenmob5" *ngIf="diaseleccionado!=undefined && diaseleccionado.deprecated == true">
+                          <div class="tooltip">
+                            <a class="btn-floating tooltipped" data-position="bottom" data-tooltip="Activar usuario"><i class="material-icons">check</i></a>
+                            <span class="tooltiptext">Inhabilitar día</span>
+                          </div>
+                        </div><br><br>
+                      </div>
+                      <div class="col s4" id="divsearchmob">
+                        <div class="valign-wrapper">
+                          <label class="label-icon" for="search" id="lupasearch"><i class="material-icons">search</i></label>
+                          <input id="inputsearchuser" type="text" pInputText size="50" (input)="tt.filterGlobal($event.target.value, 'contains')"><br>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width:25%">
+                          <div class="center-align"><label>Fecha Bloqueada</label></div>
+                        </th>
+                        <th style="width:25%">
+                          <div class="center-align"><label>Estado</label></div>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-dia>
+                      <tr>
+                        <td>
+                          <div class="sinsalirse center-align"><label class="tablacontent center-align">
+                              {{formatoDiaFecha(dia.fecha)}}
+                            </label></div>
+                        </td>
+                        <td *ngIf="dia.deprecated == true">
+                          <div class="sinsalirse center-align"><label class="tablacontent">Disponible</label></div>
+                        </td>
+                        <td *ngIf="dia.deprecated == false">
+                          <div class="sinsalirse center-align"><label class="tablacontent">Bloqueado</label></div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--
+          <div id="test10" class="col s12"><br><br>
+            <div class="col s10  offset-s1">
+              <div class="col s6"></div>
+            </div>
+            <div class="col s10  offset-s1">
+              <div class="col s12">
+                <div class="col s2" *ngIf="tramiteSeleccionadoEspecial!=undefined">
+                  <div class="sinsalirse">
+                    <div class="tooltip">
+                      <a class="btn-floating modal-trigger" data-position="bottom" data-target="modaldiasespeciales"><i class="material-icons">add_box</i></a>
+                      <span class="tooltiptext">Agregar Día <br> Especial</span>
+                    </div>
+                  </div>
+                </div>
+              </div><br><br>
+              <div class="col s4"><br><br>
+                <p-dropdown id="inputTramiteEspecial" [options]="tramites" [(ngModel)]="tramiteSeleccionadoEspecial" filter="true" placeholder="Selecciona un trámite" [style]="{'width':'100%'}" (ngModelChange)="asignarTramite()">
+                  <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-car pTemplate="item">
+                    <div>
+                      <div>{{car.label.toUpperCase()}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+              <div class="col s4"><br><br></div>
+              <div class="col s4"><br><br>
+                <a *ngIf="tramiteSeleccionadoEspecial != undefined " class="btn waves-effect waves-light" (click)="traerDiasEspeciales()">Ver
+                  días</a>
+                <a  *ngIf="tramiteSeleccionadoEspecial == undefined " class="btn waves-effect waves-light" disabled>Ver días</a>
+              </div>
+            </div>
+            <ng-container *ngIf="diasEspeciales!=undefined">
+
+            <div class="col s10"><br><br>
+              <div><label class="titulocolor">Dias Especiales</label></div>
+            </div>
+            </ng-container>
+            <div class="col s2"><br><br>
+              <div class="col s2" *ngIf="validadordiasespeciales">
+                <div class="sinsalirse">
+                  <div class="tooltip">
+                    <a class="btn-floating " data-position="bottom" (click)="eliminarDiasEspeciales()"><i class="material-icons">close</i></a>
+                    <span class="tooltiptext">Eliminar Días <br> Especial</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br><br></div>
+
+            <div class="col s12" id="cambiodetamanio" >
+
+            <div class="progress" *ngIf="loading">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+          <div class="col s12" *ngIf="loading" id="cambiodetamanio" ><br></div>
+            <div class="col s12"><br><br>
+              <ng-container *ngIf="diasEspeciales!=undefined">
+                <p-table #tt [value]="diasEspeciales" [paginator]="true" [rows]="10" [responsive]="true">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width:20%">
+                        <div class="center-align"><label>Tramite</label></div>
+                      </th>
+                      <th style="width:10%">
+                        <div class="center-align"><label>Total tramites</label></div>
+                      </th>
+                      <th style="width:10%">
+                        <div class="center-align"><label>Listado</label></div>
+                      </th>
+                      <th style="width:50%">
+                        <div class="center-align"><label>Opciones</label></div>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-diaespecial>
+                    <tr>
+                      <td>
+                        <div class="sinsalirse center-align"> {{diaespecial.nombre}} </div>
+                      </td>
+                      <td>
+                        <div class="sinsalirse center-align"> {{diaespecial.tramites.length}} </div>
+                      </td>
+                      <td>
+                        <div class="sinsalirse center-align">
+                          <div class="tooltip">
+                            <a class="btn-floating modal-trigger" data-position="bottom" data-target="modallistadotramites" (click)="asignarTramitesxTramite(diaespecial)"><i class="material-icons">library_books</i></a>
+                            <span class="tooltiptext">Listado de <br> tramites</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="sinsalirse center-align" *ngIf="diaespecial.dias_especiales.length>0">
+                          <p-table [value]="diaespecial.dias_especiales" [(selection)]="diaespecial.diasEspecialesSeleccionados">
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th style="width:10%">
+                                  <p-tableHeaderCheckbox (click)="verificardias()"></p-tableHeaderCheckbox>
+                                </th>
+                                <th style="width:100%">Fecha</th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-dia>
+                              <tr>
+                                <th style="width:10%">
+                                  <p-tableCheckbox [value]="dia" (click)="verificardias()"></p-tableCheckbox>
+                                </th>
+                                <th><label class="datoscuestionario2"> {{dia.fecha}}</label></th>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+                        <div class="sinsalirse center-align" *ngIf="diaespecial.dias_especiales.length==0">
+                          Sin días especiales
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+              </p-table>
+              </ng-container>
+
+
+          </div>
+        </div>
+        -->
+          <div id="test11" class="col s12">
+            <div class="row"><br><br><br>
+              <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br><br></div>
+
+              <div class="col s12" id="cambiodetamanio">
+
+                <div class="progress" *ngIf="loading">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+              <div class="col s12" *ngIf="loading" id="cambiodetamanio"><br></div>
+              <div class="col s12"><br><br>
+                <p-table #zt [value]="fechastope" filterBy="name" [paginator]="true" [rows]="10">
+                  <ng-template pTemplate="caption">
+                    <div class="col s8" id="div12responsive">
+                      <div class="valign-wrapper">
+                        <div class="col s1 offset-s1" id="cambioenmob1">
+                          <div class="tooltip">
+                            <a class="btn-floating modal-trigger" data-position="bottom" data-target="modalcreateFechaTope" (click)="bloqueardias()"><i class="material-icons">add</i></a>
+                            <span class="tooltiptext">Agregar nueva Fecha</span>
+                          </div>
+                        </div><br><br>
+                      </div><br>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th style="width:60%">
+                        Fecha
+                      </th>
+                      <th style="width:20%">
+                        Estado
+                      </th>
+                      <th style="width:20%">
+                        <div class="sinsalirse center-align">
+                          Opciones
+                        </div>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+                    <tr>
+                      <td>
+                        {{funcioncrearfecha(rowData.fecha)}}
+                      </td>
+                      <td>
+                        <ng-container *ngIf="rowData.is_current">
+                          Actual
+                        </ng-container>
+                        <ng-container *ngIf="!rowData.is_current">
+                          Inactivo
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="fechastope.length>1">
+                          <div class="sinsalirse center-align">
+                            <div class="tooltip">
+                              <a class="btn-floating" data-position="bottom"><i class="material-icons" (click)="eliminardialimite(rowData)">close</i></a>
+                              <span class="tooltiptext">Deshabilitar día</span>
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="fechastope.length==1">
+                          Advertencia: Solo queda una fecha límite activa
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalcreateDay" class="modal modalgrande">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Nuevo Día Bloqueado</label> <br>
+                  </div>
+                </div>
+              </div><br>
+              <div class="row">
+                <div class="col s6 offset-s3">
+                  <input [(ngModel)]="dateBloqueadoaux" name="dateBloqueado" type="date" autocomplete="off" (ngModelChange)="cambioDia($event)">
+                </div>
+              </div><br>
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+              </div>
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+                  <a *ngIf="dateBloqueado==undefined" class="btn waves-effect waves-light" disabled>Nuevo día bloqueado</a>
+                  <a *ngIf="dateBloqueado!=undefined" class="btn waves-effect waves-light" (click)="validador()">Nuevo día bloqueado</a>
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="limpiador()">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modallistadotramites" class="modal">
+  <div class="modal-content"><br><br>
+    <div class="row">
+      <div class="col s12">
+        <div class="col s12">
+          <div class="col s12">
+            <br><br>
+            <div class="col s10  offset-s1">
+              <p-table #zz [value]="tramitesxDiaEspecial" [paginator]="true" [rows]="10" [responsive]="true">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width:90%">
+                      <div class="center-align"><label>Nombre del trámite</label></div>
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-tramitexdia>
+                  <tr>
+                    <td>
+                      <div class="sinsalirse"><label class="tablacontent">{{tramitexdia.nombre}}</label></div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table><br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="input-field col s12 center-align" id="cambiodetamanio11">
+          <a id="btncerrar" class="btn modal-close waves-effect waves-light close">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modaldiasespeciales" class="modal">
+  <div class="modal-content"><br><br>
+    <div class="row">
+      <div class="col s12">
+        <div class="col s12">
+          <div class="col s10 offset-s1" *ngIf="this.tramiteseleccionadolabel!=null">
+            <label class="conseciontitulo" for="nombre">{{this.tramiteseleccionadolabel.label}}</label><br><br>
+          </div>
+          <div class="col s2  offset-s1" *ngIf="this.tramiteseleccionadolabel!=undefined">
+            <div class="tooltip">
+              <a class="btn-floating " (click)="addDiaEspecial()"><i class="material-icons">add</i></a><br *ngIf="arraydiasespeciales.length==0">
+              <span class="tooltiptext">Día Especial</span>
+            </div>
+          </div>
+          <div class="col s2">
+            <div class="tooltip">
+              <a class="btn-floating " (click)="reiniciar()"><i class="material-icons">autorenew</i></a><br>
+              <span class="tooltiptext">Reiniciar</span>
+            </div>
+          </div>
+        </div>
+        <div class="col s12">
+          <div class="col s12">
+            <br><br>
+            <div class="col s11  offset-s1" *ngFor="let diaespecial  of arraydiasespeciales; let i = index"><br>
+              <div class="col s12">
+                <div class="col s12" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="nombre">Día Especial {{i+1}}</label>
+                  </div>
+                  <div> <br>
+                    <input [(ngModel)]="diaespecial.dia" name="dateBloqueado" type="date" autocomplete="off" [style]="{'width':'100%'}" (ngModelChange)="cambioDiaEvent($event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a *ngIf="datosvalidadosdiaespecial" class="btn waves-effect waves-light" (click)="guardardiaespecial()">Guardar</a>
+          <a *ngIf="!datosvalidadosdiaespecial" class="btn waves-effect waves-light disabled">Guardar</a>
+        </div>
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="salirdiaespecial()">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalcreartramite" class="modal">
+  <div class="modal-content"><br><br>
+    <div class="row">
+      <div class="col s12">
+        <div class="col s12">
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a *ngIf="datosvalidadosdiaespecial" class="btn waves-effect waves-light" (click)="guardartramite()">Guardar</a>
+          <a *ngIf="!datosvalidadosdiaespecial" class="btn waves-effect waves-light disabled">Guardar</a>
+        </div>
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="salirtramite()">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+<div id="modalcreateTramite" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Nuevo Trámite</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Nombre del trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="nombredeltramite" id="nombredeltramite" name="nombredeltramite" autocomplete="off" type="text">
+                  </div>
+                </div>
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Duración Trámite(*):</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="duracion"    id="responsable" name="responsable"  autocomplete="off" type="number" (blur)="validarduracion()">
+                  </div>
+                </div>
+              </div> <br><br>
+
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s12">
+                  <div class="col s6" id="cambiodetamanio">
+                    <div>
+                      <label class="conseciontitulo" for="respon">Días (*):</label>
+                    </div>
+                    <div><br>
+
+                      <div class="input-field col s12 selectdias">
+                        <select id="dias_configuracion" name="dias_configuracion" [(ngModel)]="dias_configuracion" multiple>
+                             <option *ngFor="let dia of cities2" [value]="dia.value"> {{ dia.label }} </option>
+                        </select>
+                     </div>
+
+
+                     </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Inicio (*):</label>
+                    </div>
+                    <div>
+                      <div class="col s12"><br>
+                        <ng-container *ngIf="!booleanhorainicio">
+                          <select id="id_hora" name="id_hora" class="browser-default" [(ngModel)]="horainicial" (onChange)="cambioHora($event)" (change)="cambioHora($event)">
+                            <option *ngFor="let hora of horas" [value]="hora.label"> {{ hora.label }} </option>
+                          </select>
+                        </ng-container>
+                        <ng-container *ngIf="booleanhorainicio">
+                          <select id="id_hora" name="id_hora" class="browser-default">
+                          </select>
+                        </ng-container>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Final (*):</label>
+                    </div>
+                    <div><br>
+                      <select id="inputhorasdos" name="inputhorasdos" class="browser-default" [(ngModel)]="horafinal" (onChange)="cambioHorados($event)" (change)="cambioHorados($event)">
+                        <option *ngFor="let hora of horasdos" [value]="hora.label"> {{ hora.label }} </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Requisitos:</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="col s11  offset-s1" *ngFor="let requisito  of arrayrequisitos; let i = index">
+                  <div class="col s12">
+                    <label class="conseciontitulo">Requisito {{i+1}}</label>
+                  </div>
+                  <div class="col s12">
+                    <div class="col s10 input-field inline" id="cambiodetamanio">
+                      <input autocomplete="off" id="requisito{{i+1}}" name="requisito{{i+1}}" [(ngModel)]="requisito.descripcion" type="text" class="form-control" (ngModelChange)="validarrequisito()">
+                      <label class="atributoscuestionariotitulos" for="requisito{{i+1}}">Descripción {{i+1}}</label><br>
+                    </div>
+                    <div class="col s2 input-field inline" id="cambiodetamanio">
+                      <a class="btn-floating " (click)="deleterequisito(i)"><i class="material-icons">clear</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="col s11  offset-s1">
+                  <div class="tooltip">
+                    <a class="btn-floating " (click)="addRequisito()"><i class="material-icons">add</i></a><br>
+                    <span class="tooltiptext">Crear nuevo requisito</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+                  <a *ngIf="(horasdos != null && horasdos.length == 0) || (horasdos==undefined) || (nombredeltramite == undefined && nombredeltramite == '') || (dias_configuracion != null  && horasdos.length == 0) || this.objhora2 == undefined || verificarrutas == false"
+                    class="btn waves-effect waves-light" disabled>Crear Trámite</a>
+                  <a *ngIf="(horasdos != null && horasdos.length > 0) && (nombredeltramite != undefined && nombredeltramite != '') && (dias_configuracion != null  && dias_configuracion.length > 0) && this.objhora2 != undefined && verificarrutas == true"
+                    class="btn waves-effect waves-light" (click)="validadorCreacionTramite()">Crear Trámite</a>
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="limpiarnuevotramite()">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+-->
+
+<div id="modalcreateFechaTope" class="modal">
+  <div class="modal-content"><br><br>
+    <div class="row">
+      <div class="col s12">
+        <div class="col s12">
+          <div class="col s12">
+            <div class="col s10  offset-s1">
+              <div class="col s12" id="cambiodetamanio">
+                <div>
+                  <label class="conseciontitulo" for="nombre"> Agregar nuevo tope de Fechas</label>
+                </div>
+              </div>
+            </div>
+            <div><br><br>
+            </div>
+            <div class="col s10  offset-s1">
+              <div class="col s12">
+                <div class="col s6" id="cambiodetamanio">
+                  <div class="ui-g-12 ui-md-12">
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="col s12">
+                        <div class="col s6" id="cambiodetamanio">
+                          <div class="ui-g-12 ui-md-12">
+
+                            <label class="conseciontitulo">Día Inicio:</label><br>
+                            <input [(ngModel)]="datetope" id="dateBloqueadoinput" name="dateBloqueadoinput" type="date" autocomplete="off" [style]="{'width':'100%'}" (change)="calculardiatope()">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a *ngIf="validaciondiatope" class="btn waves-effect waves-light close" (click)="agregarDiaTope()">Agregar</a>
+          <a *ngIf="!validaciondiatope" class="btn waves-effect waves-light close" disabled>Agregar</a>
+        </div>
+        <div class="input-field col s6 center-align" id="cambiodetamanio11">
+          <a id="btncerrar" class="btn modal-close waves-effect waves-light close" (click)="limpiarmodaltope()">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modaledicionTramite" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo" *ngIf="tramiteseleccionadoedicion!=undefined"> Edición Trámite {{tramiteseleccionadoedicion.label}}</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Nombre del trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="nombredeltramiteedicion" id="nombredeltramiteedicion" name="nombredeltramiteedicion" autocomplete="off" type="text">
+                  </div>
+                </div>
+              </div> <br><br>
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Descripción del Trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="descripciondeltramiteedicion" id="descripciondeltramiteedicion" name="descripciondeltramiteedicion" autocomplete="off" type="text">
+                  </div>
+                </div>
+
+              </div> <br><br>
+
+              <div class="col s12">
+                <div class="col s11  offset-s1">
+                  <div class="tooltip">
+                    <a class="btn-floating " (click)="addRequisitoedicion()"><i class="material-icons">add</i></a><br>
+                    <span class="tooltiptext">Crear nuevo requisito</span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col s12" *ngIf="arrayrequisitosedicion.length>0">
+
+                <div class="col s10 offset-s1"><br><br>
+                  <p-table [value]="arrayrequisitosedicion" [columns]="colsrequisitos" [reorderableColumns]="true" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,30,40,50,60]">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th style="width:3rem"></th>
+                        <th style="width:10%">
+                          Orden
+                        </th>
+                        <th *ngFor="let col of columns" pReorderableColumn style={{col.style}}>
+                          {{col.header}}
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-requisito let-columns="columns" let-index="rowIndex">
+                      <tr [pReorderableRow]="index">
+                        <td>
+                          <span class="pi pi-bars" pReorderableRowHandle></span>
+                        </td>
+                        <td>
+                          <div class="center-align">
+                            {{index+1}}
+                          </div>
+                        </td>
+                        <td>
+                          <input pInputText type="text" id="descripcion{{index}}" name="descripcion{{index}}" [(ngModel)]="requisito.descripcion" (ngModelChange)="validarrequisitoedicion()">
+
+                        </td>
+                        <td>
+                          <input pInputText type="text" id="descripcion_larga{{index}}" name="descripcion_larga{{index}}" [(ngModel)]="requisito.descripcion_larga" (ngModelChange)="validarrequisitoedicion()">
+
+                        </td>
+                        <td>
+                          <a class="btn-floating " (click)="deleterequisitoedicion(index)"><i class="material-icons">clear</i></a>
+
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                </div>
+              </div>
+
+              <!--
+              <div class="col s12">
+                <div class="col s11  offset-s1" *ngFor="let requisito  of arrayrequisitosedicion; let i = index">
+                  <div class="col s12">
+                    <label class="conseciontitulo">Requisito {{i+1}}</label>
+                  </div>
+                  <div class="col s12">
+                    <div class="col s10 input-field inline" id="cambiodetamanio">
+                      <input autocomplete="off" id="requisitoedicion{{i+1}}" name="requisitoedicion{{i+1}}" [(ngModel)]="requisito.descripcion" type="text" class="form-control" (ngModelChange)="validarrequisitoedicion()">
+                    </div>
+                    <div class="col s2 input-field inline" id="cambiodetamanio">
+                      <a class="btn-floating " (click)="deleterequisitoedicion(i)"><i class="material-icons">clear</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="col s11  offset-s1">
+                  <div class="tooltip">
+                    <a class="btn-floating " (click)="addRequisitoedicion()"><i class="material-icons">add</i></a><br>
+                    <span class="tooltiptext">Crear nuevo requisito</span>
+                  </div>
+                </div>
+              </div>
+              -->
+              <!--
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s12">
+
+                   <div class="col s6" id="cambiodetamanio">
+                     <div>
+                       <label class="conseciontitulo" for="respon">Días (*):</label>
+                     </div>
+                     <div><br>
+                       <p-multiSelect id="diasedicion" name="diasedicion" [options]="cities2" [(ngModel)]="dias_configuracion_edicion" [defaultLabel]="'Selecciona el día'" [style]="{width: '100%'}" selectedItemsLabel="{0} Día(s) Seleccionados"></p-multiSelect>
+                      </div>
+                   </div>
+                   <div class="col s3">
+                         <div>
+                          <label class="conseciontitulo" for="nombre">Hora Inicio (*):</label>
+                        </div>
+                        <div>
+                           <div class="col s12"><br>
+                             <select id="id_hora_edicion" name="id_hora_edicion" class="browser-default" [(ngModel)]="horainicialedicion" (onChange)="cambioHoraEdicion($event)" (change)="cambioHoraEdicion($event)">
+                                <option *ngFor="let hora of horasedicion" [value]="hora.label"> {{ hora.label }} </option>
+                             </select>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col s3">
+                        <div>
+                         <label class="conseciontitulo" for="nombre">Hora Final (*):</label>
+                       </div>
+                       <div><br>
+                         <select id="inputhorasdos" name="inputhorasdos" class="browser-default" [(ngModel)]="horafinaledicion" (onChange)="cambioHoradosEdicion($event)" (change)="cambioHoradosEdicion($event)">
+                            <option *ngFor="let hora of horasdosedicion" [value]="hora.label"> {{ hora.label }} </option>
+                         </select>
+                       </div>
+                 </div>
+                 </div>
+              </div>
+              -->
+
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+                  <a *ngIf="loading || (nombredeltramiteedicion == undefined && nombredeltramiteedicion == '') || verificarrutas == false" class="btn waves-effect waves-light" disabled>Guardar Trámite</a>
+                  <a *ngIf="loading == false && (nombredeltramiteedicion != undefined && nombredeltramiteedicion != '') && verificarrutas == true" class="btn modal-close waves-effect waves-light" (click)="validadorEdicionTramite()">Guardar Trámite</a>
+                  <!--
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length == 0) || (horasdosedicion==undefined) || (nombredeltramiteedicion == undefined && nombredeltramiteedicion == '') || (dias_configuracion_edicion != null  && horasdosedicion.length == 0) || this.objhora2edicion == undefined || verificarrutasedicion == false" class="btn waves-effect waves-light" disabled>Guardar Trámite</a>
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length > 0) && (nombredeltramiteedicion != undefined && nombredeltramiteedicion != '') && (dias_configuracion_edicion != null  && dias_configuracion_edicion.length > 0) && this.objhora2edicion != undefined && verificarrutasedicion == true" class="btn waves-effect waves-light" (click)="validadorCreacionTramite()">Guardar Trámite</a>
+                  -->
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modalinfoTramite" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo" *ngIf="tramiteseleccionadolabel!=undefined"> Trámite: {{tramiteseleccionadolabel.label}}</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Tiempo de Cita: <ng-container *ngIf="uniontramite!=undefined"> {{uniontramite.configuracion.tiempo_cita}}</ng-container> minutos.</label>
+                  </div>
+                </div>
+              </div> <br><br>
+              <div class="input-field col s10 offset-s1">
+                <div class="col s12">
+                  <div class="col s6" id="cambiodetamanio9">
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label class="conseciontitulo" for="respon">Días: </label>
+
+                    </div>
+
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label> {{enunciadodiastramite}} </label>
+
+                    </div>
+
+                  </div>
+                  <div class="col s3" id="cambiodetamanio9">
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label class="conseciontitulo" for="respon">Hora Inicio: </label>
+
+                    </div>
+
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label> {{horainicioinfo}} </label>
+
+                    </div>
+                  </div>
+                  <div class="col s3" id="cambiodetamanio9">
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label class="conseciontitulo" for="respon">Hora Final: </label>
+
+                    </div>
+
+                    <div class="col s12" *ngIf="uniontramite!=undefined">
+                      <label> {{horafinalinfo}} </label>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--
+                  <div class="col s12" *ngIf="uniontramite!=undefined">
+
+                <p-table [value]="uniontramite.configuracion.dias">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+
+                      <th style="width:30%">
+                        <div><label>Nombre</label></div>
+                      </th>
+                      <th style="width:20%">
+                        <div class="center-align"><label>Hora Inicio</label></div>
+                      </th>
+                      <th style="width:20%">
+                        <div class="center-align"><label>Hora Final</label></div>
+                      </th>
+                      <th style="width:10%">
+                        <div class="center-align"><label>Habilitado</label></div>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+                    <tr>
+                      <td>
+                        <div  >
+                          {{rowData.nombre.toUpperCase()}}
+                        </div>
+                      </td>
+                      <td class="center-align">
+                        <div class="center-align">
+                        <ng-container *ngIf="rowData.inicio!=undefined">
+                          {{splithora(rowData.inicio)}}
+                        </ng-container>
+                        </div>
+                       </td>
+                      <td class="center-align">
+                        <div class="center-align">
+                        <ng-container *ngIf="rowData.fin!=undefined">
+
+                        {{splithora(rowData.fin)}}
+                      </ng-container>
+                      </div>
+
+                      </td>
+                      <td class="center-align">
+                        <div class="center-align">
+                        <ng-container *ngIf="rowData.permitido">
+                          Si
+                        </ng-container>
+                        <ng-container *ngIf="!rowData.permitido">
+                          No
+                        </ng-container>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+
+                -->
+              </div>
+
+              <div class="input-field col s10 offset-s1">
+
+              </div>
+
+
+              <div class="input-field col s10 offset-s1">
+
+              </div>
+
+
+              <div class="input-field col s12" id="cambiodetamanio9">
+                <div class="input-field col s12 center-align" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light">Salir</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modaledicionConfiguracionTramite" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo" *ngIf="tramiteseleccionadoedicion!=undefined"> Edición Configuración del Trámite {{tramiteseleccionadoedicion.label}}</label> <br>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Duración del trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="duracion_edicion" id="duracion_edicion" name="duracion_edicion" autocomplete="off" type="number" (blur)="validarduracionEdicion()">
+                  </div>
+                </div>
+              </div> <br><br>
+
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s12">
+
+                  <div class="col s6" id="cambiodetamanio">
+                    <div>
+                      <label class="conseciontitulo" for="respon">Días (*):</label>
+                    </div>
+                    <div class="input-field col s12 selectdias"><br>
+
+                      <select id="diasedicion" name="diasedicion" [(ngModel)]="dias_configuracion_edicion" multiple>
+                        <option *ngFor="let dia of citiesedicion" [value]="dia.value"> {{ dia.label }} </option>
+                      </select>
+                      <!--
+                       <p-multiSelect id="diasedicion" name="diasedicion" [options]="cities2" [(ngModel)]="dias_configuracion_edicion" [defaultLabel]="'Selecciona el día'" [style]="{width: '100%'}" selectedItemsLabel="{0} Día(s) Seleccionados"></p-multiSelect>
+                       -->
+
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Inicio (*):</label>
+                    </div>
+                    <div>
+                      <div class="col s12"><br>
+                        <select id="id_hora_edicion" name="id_hora_edicion" class="browser-default" [(ngModel)]="horainicialedicion" (onChange)="cambioHoraEdicion()" (change)="cambioHoraEdicion()">
+                          <option *ngFor="let hora of horasedicion" [value]="hora.label"> {{ hora.label }} </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Final (*):</label>
+                    </div>
+                    <div><br>
+                      <select id="inputhorasdos" name="inputhorasdos" class="browser-default" [(ngModel)]="horafinaledicion" (onChange)="cambioHoradosEdicion($event)" (change)="cambioHoradosEdicion($event)">
+                        <option *ngFor="let hora of horasdosedicion" [value]="hora.label"> {{ hora.label }} </option>
+                      </select>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length == 0) || (horasdosedicion==undefined)  || (dias_configuracion_edicion != null  && horasdosedicion.length == 0) || this.horafinaledicion == undefined || loading"
+                    class="btn waves-effect waves-light" disabled>Cambiar Configuración</a>
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length > 0) &&  (dias_configuracion_edicion != null  && dias_configuracion_edicion.length > 0) && this.horafinaledicion != undefined && loading == false"
+                    class="btn waves-effect waves-light" (click)="cambarconfiguraciontramite()">Cambiar Configuración</a>
+
+                  <!--
+                  <a *ngIf="(nombredeltramiteedicion == undefined && nombredeltramiteedicion == '') || verificarrutasedicion == false" class="btn waves-effect waves-light" disabled>Edición Trámite</a>
+                  <a *ngIf="(nombredeltramiteedicion != undefined && nombredeltramiteedicion != '') && verificarrutasedicion == true" class="btn waves-effect waves-light" (click)="validadorEdicionConfiguracionTramite()">Edición Trámite</a>
+                  -->
+
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modaledicionConfiguracionTramiteGrobal" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Edición Global de la Configuración de Trámites</label> <br>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Duración del trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="duracion_edicion" id="duracion_edicion" name="duracion_edicion" autocomplete="off" type="number" (blur)="validarduracionEdicion()">
+                  </div>
+                </div>
+              </div> <br><br>
+
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s12">
+
+                  <div class="col s6" id="cambiodetamanio">
+                    <div>
+                      <label class="conseciontitulo" for="respon">Días (*):</label>
+                    </div>
+                    <div class="input-field col s12 selectdias"><br>
+
+                      <select id="diasediciongrobal" name="diasediciongrobal" [(ngModel)]="dias_configuracion_edicion" multiple>
+                        <option *ngFor="let dia of citiesedicion" [value]="dia.value"> {{ dia.label }} </option>
+                      </select>
+                      <!--
+                       <p-multiSelect id="diasedicion" name="diasedicion" [options]="cities2" [(ngModel)]="dias_configuracion_edicion" [defaultLabel]="'Selecciona el día'" [style]="{width: '100%'}" selectedItemsLabel="{0} Día(s) Seleccionados"></p-multiSelect>
+                       -->
+
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Inicio (*):</label>
+                    </div>
+                    <div>
+                      <div class="col s12"><br>
+                        <select id="id_hora_edicion" name="id_hora_edicion" class="browser-default" [(ngModel)]="horainicialedicion" (onChange)="cambioHoraEdicion()" (change)="cambioHoraEdicion()">
+                          <option *ngFor="let hora of horasedicion" [value]="hora.label"> {{ hora.label }} </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s3">
+                    <div>
+                      <label class="conseciontitulo" for="nombre">Hora Final (*):</label>
+                    </div>
+                    <div><br>
+                      <select id="inputhorasdos" name="inputhorasdos" class="browser-default" [(ngModel)]="horafinaledicion" (onChange)="cambioHoradosEdicion($event)" (change)="cambioHoradosEdicion($event)">
+                        <option *ngFor="let hora of horasdosedicion" [value]="hora.label"> {{ hora.label }} </option>
+                      </select>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length == 0) || (horasdosedicion==undefined)  || (dias_configuracion_edicion != null  && horasdosedicion.length == 0) || this.horafinaledicion == undefined || loading"
+                    class="btn waves-effect waves-light" disabled>Cambiar Configuración</a>
+                  <a *ngIf="(horasdosedicion != null && horasdosedicion.length > 0) &&  (dias_configuracion_edicion != null  && dias_configuracion_edicion.length > 0) && this.horafinaledicion != undefined && loading == false"
+                    class="btn waves-effect waves-light modal-close" (click)="cambarconfiguraciontramiteGrobal()">Cambiar Configuración</a>
+
+                  <!--
+                  <a *ngIf="(nombredeltramiteedicion == undefined && nombredeltramiteedicion == '') || verificarrutasedicion == false" class="btn waves-effect waves-light" disabled>Edición Trámite</a>
+                  <a *ngIf="(nombredeltramiteedicion != undefined && nombredeltramiteedicion != '') && verificarrutasedicion == true" class="btn waves-effect waves-light" (click)="validadorEdicionConfiguracionTramite()">Edición Trámite</a>
+                  -->
+
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalcreateTramite" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Nuevo Trámite</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Nombre del trámite (*)</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="nombredeltramite" id="nombredeltramite" name="nombredeltramite" autocomplete="off" type="text">
+                  </div>
+                </div>
+
+              </div> <br><br>
+
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Descripción del Trámite</label>
+                  </div>
+                  <div>
+                    <input [(ngModel)]="descripciondeltramite" id="descripciondeltramite" name="descripciondeltramite" autocomplete="off" type="text">
+                  </div>
+                </div>
+
+              </div> <br><br>
+
+
+
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Requisitos:</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="col s11  offset-s1">
+                  <div class="tooltip">
+                    <a class="btn-floating " (click)="addRequisito()"><i class="material-icons">add</i></a><br>
+                    <span class="tooltiptext">Crear nuevo requisito</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12" *ngIf="arrayrequisitos.length>0">
+
+                <div class="col s10 offset-s1"><br><br>
+                  <p-table [value]="arrayrequisitos" [columns]="colsrequisitos" [reorderableColumns]="true" responsiveLayout="scroll" >
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th style="width:3rem"></th>
+                        <th style="width:10%">
+                          Orden
+                        </th>
+                        <th *ngFor="let col of columns" pReorderableColumn style={{col.style}}>
+                          {{col.header}}
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-requisito let-columns="columns" let-index="rowIndex">
+                      <tr [pReorderableRow]="index">
+                        <td>
+                          <span class="pi pi-bars" pReorderableRowHandle></span>
+                        </td>
+                        <td>
+                          <div class="center-align">
+                            {{index+1}}
+                          </div>
+                        </td>
+                        <td>
+                          <input pInputText type="text" id="descripcion{{index}}" name="descripcion{{index}}" [(ngModel)]="requisito.descripcion" (ngModelChange)="validarrequisito()">
+
+                        </td>
+                        <td>
+                          <input pInputText type="text" id="descripcion_larga{{index}}" name="descripcion_larga{{index}}" [(ngModel)]="requisito.descripcion_larga" (ngModelChange)="validarrequisito()">
+
+                        </td>
+                        <td>
+                          <a class="btn-floating " (click)="deleterequisito(index)"><i class="material-icons">clear</i></a>
+
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                </div>
+
+                <!--
+                <div class="col s11  offset-s1" *ngFor="let requisito  of arrayrequisitos; let i = index">
+                  <div class="col s12">
+                    <label class="conseciontitulo">Requisito {{i+1}}</label>
+                  </div>
+                  <div class="col s12">
+                    <div class="col s10 input-field inline" id="cambiodetamanio">
+                      <input autocomplete="off" id="requisito{{i+1}}" name="requisito{{i+1}}" [(ngModel)]="requisito.descripcion" type="text" class="form-control" (ngModelChange)="validarrequisito()">
+                      <label class="atributoscuestionariotitulos" for="requisito{{i+1}}">Descripción {{i+1}}</label><br>
+                    </div>
+                    <div class="col s2 input-field inline" id="cambiodetamanio">
+                      <a class="btn-floating " (click)="deleterequisito(i)"><i class="material-icons">clear</i></a>
+                    </div>
+                  </div>
+
+                  <div class="col s12">
+                    <div class="col s10 input-field inline" id="cambiodetamanio">
+                      <input autocomplete="off" id="requisitolarga{{i+1}}" name="requisitolarga{{i+1}}" [(ngModel)]="requisito.descripcion_larga" type="text" class="form-control" (ngModelChange)="validarrequisito()">
+                      <label class="atributoscuestionariotitulos" for="requisitolarga{{i+1}}">Descripción Extendida {{i+1}}</label><br>
+                    </div>
+
+                  </div>
+
+                </div>
+                -->
+              </div>
+              <!--
+              <div class="col s12">
+                <div class="col s11  offset-s1">
+                  <div class="tooltip">
+                    <a class="btn-floating " (click)="addRequisito()"><i class="material-icons">add</i></a><br>
+                    <span class="tooltiptext">Crear nuevo requisito</span>
+                  </div>
+                </div>
+              </div>
+              -->
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+                  <a *ngIf="(nombredeltramite == undefined || (nombredeltramite != undefined && nombredeltramite.trim() == '')) || verificarrutas == false || loading" class="btn waves-effect waves-light" disabled>Crear Trámite</a>
+                  <a *ngIf="(nombredeltramite != undefined && (nombredeltramite != undefined && nombredeltramite.trim() != '')) && verificarrutas == true && loading == false" class="btn modal-close waves-effect waves-light"
+                    (click)="validadorCreacionTramite()">Crear Trámite</a>
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="limpiarnuevotramite()">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modalinfoTramiteGrobal" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Configuración global de trámites</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="input-field col s10 offset-s1" id="cambiodetamanio9">
+                <div class="col s6" id="cambiodetamanio">
+                  <div>
+                    <label class="conseciontitulo" for="respon">Tiempo de Cita: <ng-container *ngIf="uniontramite!=undefined"> {{uniontramite.configuracion.tiempo_cita}} minutos.</ng-container>
+                      <ng-container *ngIf="uniontramite==undefined"> N/A .</ng-container>
+                    </label>
+                  </div>
+                </div>
+              </div> <br><br>
+              <div class="input-field col s10 offset-s1">
+                <div class="col s12">
+                  <div class="col s6" id="cambiodetamanio9">
+                    <div class="col s12">
+                      <label class="conseciontitulo" for="respon">Días: </label>
+
+                    </div>
+
+                    <div class="col s12">
+                      <label> {{enunciadodiastramite}} </label>
+
+                    </div>
+
+                  </div>
+                  <div class="col s3" id="cambiodetamanio9">
+                    <div class="col s12">
+                      <label class="conseciontitulo" for="respon">Hora Inicio: </label>
+
+                    </div>
+
+                    <div class="col s12">
+                      <label> {{horainicioinfo}} </label>
+
+                    </div>
+                  </div>
+                  <div class="col s3" id="cambiodetamanio9">
+                    <div class="col s12">
+                      <label class="conseciontitulo" for="respon">Hora Final: </label>
+
+                    </div>
+
+                    <div class="col s12">
+                      <label> {{horafinalinfo}} </label>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s1">
+
+              </div>
+
+
+              <div class="input-field col s10 offset-s1">
+
+              </div>
+
+
+              <div class="input-field col s12" id="cambiodetamanio9">
+                <div class="input-field col s12 center-align" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light">Salir</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="modalcreateRecomendacion" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12" id="cambiodetamanio">
+        <div id="login-page" class="row"><br><br>
+          <div class="col s12 card-panel">
+            <form class="login-form">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">apps</i> <br>
+                    <label class="conseciontitulo"> Nueva Recomendación</label> <br>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="col s12">
+                  <div class="col s12 input-field inline" id="cambiodetamanio">
+                    <input autocomplete="off" id="recomendacion" name="recomendacion" [(ngModel)]="recomendacion" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col s12">
+                <div class="col s12">
+                  <div class="col s12 input-field inline" id="cambiodetamanio">
+                   </div>
+                </div>
+              </div>
+
+              <div class="input-field col s10 offset-s2" id="cambiodetamanio9">
+                <div class="input-field col s5" id="cambiodetamanio10">
+
+                  <a *ngIf="(recomendacion == undefined || (recomendacion != undefined && recomendacion.trim() == '')) || loading" class="btn waves-effect waves-light" disabled>Crear Recomendación</a>
+                  <a *ngIf="(recomendacion != undefined && (recomendacion != undefined && recomendacion.trim() != '')) && loading == false" class="btn modal-close waves-effect waves-light" (click)="crearRecomendacionEnvio()">Crear Recomendación</a>
+
+                </div>
+                <div class="input-field col s5 offset-s1" id="cambiodetamanio11">
+                  <a id="btncerrar" class="btn modal-close waves-effect waves-light" (click)="limpiarnuevotramite()">Cancelar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
