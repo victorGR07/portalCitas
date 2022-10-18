@@ -86,7 +86,7 @@ constructor(
           this.asignarEstados(result);
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         });
     }
 
@@ -177,7 +177,7 @@ constructor(
       }, (error) => {
         this.loading = false;
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Folio no encontrado en el sistema, favor de volverlo a intentar.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
 
   }
@@ -335,11 +335,11 @@ constructor(
           }
         }).subscribe(result => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; Se ha agregado el comentario a la cita.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
 
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al guardar el comentario, favor de intentarlo de nuevo.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         });
     }
 
@@ -402,7 +402,7 @@ constructor(
         
           }, (error) => {
             var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita, favor de intentarlo de nuevo.</div></span>';
-            M.toast({ html: toastHTML });
+            M.toast({ html: toastHTML , displayLength:40000});
             this.loading = false;
 
           });
@@ -435,7 +435,7 @@ constructor(
 
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita, favor de intentarlo de nuevo.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
           this.loading = false;
 
         });
@@ -456,7 +456,7 @@ constructor(
            this.atenderCita()
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita, favor de intentarlo de nuevo.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
           this.loading = false;
 
         });
@@ -476,14 +476,14 @@ constructor(
           }
         }).subscribe(result => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; La cita se ha marcado como finalizada.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
           this.loading = false;
           this.actualizarcita = true;
           this.recargar();
 
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita, favor de intentarlo de nuevo.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
           this.loading = false;
 
         });

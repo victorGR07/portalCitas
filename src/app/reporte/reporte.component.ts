@@ -100,7 +100,7 @@ constructor(
         }, (error) => {
 
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error en la obtención de Citas.    </div></span>';
-          M.toast({html: toastHTML});
+          M.toast({html: toastHTML, displayLength:40000});
          });
 
 
@@ -153,7 +153,7 @@ constructor(
         this.asignarEstados(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -222,7 +222,7 @@ constructor(
     }, (error) => {
 
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error en la obtención de Citas.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
      });
   }
 
@@ -343,7 +343,7 @@ constructor(
      }, (error) => {
 
        var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error en la obtención de Citas.    </div></span>';
-       M.toast({html: toastHTML});
+       M.toast({html: toastHTML, displayLength:40000});
       });
 
 
@@ -530,7 +530,7 @@ constructor(
         if (date1.getTime() > date2.getTime()){
           this.getFechaFinal.setValue(null);
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; La fecha limite no debe ser menor a la fecha inicial.    </div></span>';
-          M.toast({html: toastHTML});
+          M.toast({html: toastHTML, displayLength:40000});
         }
       }
     }, 100);

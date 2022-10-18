@@ -63,7 +63,7 @@ export class ResetPasswordComponent implements OnInit {
           }
         })
         .subscribe(({ data }) => {
-          M.toast({html: '<i class="material-icons left">info</i> Contraseña actualizada!'})
+          M.toast({html: '<i class="material-icons left">info</i> Contraseña actualizada!',displayLength:40000})
 
           setTimeout(() => {
             let ruta = "/";
@@ -74,43 +74,13 @@ export class ResetPasswordComponent implements OnInit {
 
 
         }, (error) => {
-          M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar la contraseña del Usuario!' })
+          M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar la contraseña del Usuario!' ,displayLength:40000})
         });
     }else{
-      M.toast({html: '<i class="material-icons left">info</i> Las contraseñas deben ser iguales!'})
+      M.toast({html: '<i class="material-icons left">info</i> Las contraseñas deben ser iguales!',displayLength:40000})
 
     }
 
-
-
-
-    /*
-    this.apollo.use('backproveedores')
-      .mutate({
-        mutation: N.ACTUALIZAR_USUARIO,
-        variables: {
-          id: this.user.id,
-          id_rol: this.user.rol.id,
-          nombre: this.user.nombre,
-          primer_apellido: this.user.primer_apellido,
-          segundo_apellido: this.user.segundo_apellido,
-          correo: this.user.correo,
-          clave_privada: this.utils.hashing(this.getClavePrivada.value),
-          id_usuario: this.user.id,
-          curp: this.user.curp,
-        }
-      })
-      .subscribe(({ data }) => {
-        M.toast({html: '<i class="material-icons left">info</i> Contraseña actualizada!'})
-
-        let ruta = "/";
-        this.service.logout();
-        this.sessionStorageService.clean();
-        window.location.href = ruta;
-      }, (error) => {
-        M.toast({html: '<i class="material-icons left">info</i> Error en el cambio de contraseña!'})
-      });
-      */
 
   }
 

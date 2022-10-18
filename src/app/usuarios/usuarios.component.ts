@@ -204,7 +204,7 @@ export class UsuariosComponent implements OnInit {
   verificarCorreo(data){
     this.correorepetido = false;
     if(data.data.usuarioPersonalizado.length>0){
-      M.toast({ html: '<i class="material-icons left">info</i> Correo repetido!' })
+      M.toast({ html: '<i class="material-icons left">info</i> Correo repetido!' , displayLength:40000})
       this.correorepetido = true;
     }
   }
@@ -230,7 +230,7 @@ export class UsuariosComponent implements OnInit {
     this.correorepetido = false;
     if(data.data.usuarioPersonalizado.length>0){
       if(data.data.usuarioPersonalizado[0].id != this.usuarioSeleccionado.id){
-        M.toast({ html: '<i class="material-icons left">info</i> Correo repetido!' })
+        M.toast({ html: '<i class="material-icons left">info</i> Correo repetido!' , displayLength:40000})
         this.correorepetido = true;
       }
 
@@ -256,7 +256,7 @@ export class UsuariosComponent implements OnInit {
   verificarCurp(data){
     this.curprepetido = false;
     if(data.data.usuarioPersonalizado.length>0){
-      M.toast({ html: '<i class="material-icons left">info</i> CURP repetido!' })
+      M.toast({ html: '<i class="material-icons left">info</i> CURP repetido!' , displayLength:40000})
       this.curprepetido = true;
 
     }
@@ -284,15 +284,15 @@ export class UsuariosComponent implements OnInit {
           }
         })
         .subscribe(({ data }) => {
-          M.toast({ html: '<i class="material-icons left">info</i> Usuario agregado!' })
+          M.toast({ html: '<i class="material-icons left">info</i> Usuario agregado!' , displayLength:40000})
           this.traerusuarios();
           this.regresar();
           this.loading = false;
 
         }, (error) => {
           var divisiones = error.message.split(":", 2);
-           M.toast({ html: '<i class="material-icons left">info</i> Error al crear el Usuario!' })
-           M.toast({html: divisiones[1]})
+           M.toast({ html: '<i class="material-icons left">info</i> Error al crear el Usuario!' , displayLength:40000})
+           M.toast({html: divisiones[1], displayLength:40000})
            this.loading = false;
 
         });
@@ -331,14 +331,14 @@ export class UsuariosComponent implements OnInit {
           }
         })
         .subscribe(({ data }) => {
-          M.toast({ html: '<i class="material-icons left">info</i> Usuario actualizado!' })
+          M.toast({ html: '<i class="material-icons left">info</i> Usuario actualizado!' , displayLength:40000})
           this.traerusuarios();
           this.regresar();
           this.loading = false;
 
         }, (error) => {
           this.loading = false;
-          M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar el Usuario!' })
+          M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar el Usuario!' , displayLength:40000})
         });
     }
 
@@ -387,11 +387,11 @@ export class UsuariosComponent implements OnInit {
               }
             })
             .subscribe(({ data }) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desactivado!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desactivado!' , displayLength:40000})
               that.traerusuarios();
               that.regresar();
             }, (error) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar desactivar el usuario!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar desactivar el usuario!' , displayLength:40000})
             });
         }
       })
@@ -414,11 +414,11 @@ export class UsuariosComponent implements OnInit {
               }
             })
             .subscribe(({ data }) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desactivado!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desactivado!' , displayLength:40000})
               that.traerusuarios();
               that.regresar();
             }, (error) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar habilitar el usuario!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar habilitar el usuario!' , displayLength:40000})
             });
         }
       })
@@ -447,11 +447,11 @@ export class UsuariosComponent implements OnInit {
               }
             })
             .subscribe(({ data }) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desbloqueado!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Usuario Desbloqueado!' , displayLength:40000})
               that.traerusuarios();
               that.regresar();
             }, (error) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar desbloquear el Usuario!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar desbloquear el Usuario!' , displayLength:40000})
             });
         }
       })
@@ -475,12 +475,12 @@ export class UsuariosComponent implements OnInit {
               }
             })
             .subscribe(({ data }) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Usuario Bloqueado!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Usuario Bloqueado!' , displayLength:40000})
 
               that.traerusuarios();
               that.regresar();
             }, (error) => {
-              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar bloquear el usuario!' })
+              M.toast({ html: '<i class="material-icons left">info</i> Error al intentar bloquear el usuario!' , displayLength:40000})
             });
         }
       })
@@ -531,11 +531,11 @@ export class UsuariosComponent implements OnInit {
             }
           })
           .subscribe(({ data }) => {
-            M.toast({ html: '<i class="material-icons left">info</i> Contraseña actualizada, se envio al correo del Usuario!' })
+            M.toast({ html: '<i class="material-icons left">info</i> Contraseña actualizada, se envio al correo del Usuario!' , displayLength:40000})
             that.traerusuarios();
             that.regresar();
           }, (error) => {
-            M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar la contraseña del Usuario!' })
+            M.toast({ html: '<i class="material-icons left">info</i> Error al actualizar la contraseña del Usuario!' , displayLength:40000})
           });
 
       }

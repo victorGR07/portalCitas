@@ -97,10 +97,10 @@ constructor(
         this.loading = false;
         this.regresar();
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; Notificación enviada correctamente.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al enviar la notificación.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
 
   }
@@ -148,7 +148,7 @@ constructor(
         if (date1.getTime() < date2.getTime()){
           this.fecha_notificacion = null;
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; La fecha limite no debe ser menor a la fecha inicial.    </div></span>';
-          M.toast({html: toastHTML});
+          M.toast({html: toastHTML, displayLength:40000});
         }else{
           this.validarreportes();
   
@@ -171,7 +171,7 @@ constructor(
         this.asignarDatosReporte(result);
      }, (error) => {
        var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;No se tienen citas registradas en la fecha seleccionada.    </div></span>';
-       M.toast({html: toastHTML});
+       M.toast({html: toastHTML, displayLength:40000});
       });
   }
 
@@ -179,7 +179,7 @@ constructor(
     if(data.data.reportesCitas.length==0){
       this.fecha_notificacion = null;
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;No se tienen citas registradas en la fecha seleccionada.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
     }
   }
 

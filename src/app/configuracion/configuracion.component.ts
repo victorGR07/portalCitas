@@ -202,7 +202,7 @@ export class ConfiguracionComponent implements OnInit {
         this.asignarRecomendaciones(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -233,7 +233,7 @@ export class ConfiguracionComponent implements OnInit {
         this.asignarFechasTope(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -416,7 +416,7 @@ export class ConfiguracionComponent implements OnInit {
         this.asignarDias(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -481,11 +481,11 @@ export class ConfiguracionComponent implements OnInit {
         this.limpiador();
         this.traerDias();
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Fecha creada con exito</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       }, (error) => {
 
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al crear el día bloqueado</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -513,7 +513,7 @@ export class ConfiguracionComponent implements OnInit {
       if (variable == true) {
         this.dateBloqueado = null;
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Día ya registrado.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       }
     } else {
       this.dateBloqueado = null;
@@ -537,7 +537,7 @@ export class ConfiguracionComponent implements OnInit {
         this.asignarDiasEspeciales(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -646,7 +646,7 @@ export class ConfiguracionComponent implements OnInit {
         }
       }).subscribe(result => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Dia Especial Agregado.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         $(document).ready(function() {
           (<any>$(".modal")).modal('close');
           (<any>$(".modal")).modal('close');
@@ -723,7 +723,7 @@ export class ConfiguracionComponent implements OnInit {
         mensaje = mensaje + "<br> * " + mensajes[i];
       }
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;' + mensaje + '</div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
     }
   }
 
@@ -748,7 +748,7 @@ export class ConfiguracionComponent implements OnInit {
 
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al intentar actualizar el tramite</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -789,11 +789,11 @@ export class ConfiguracionComponent implements OnInit {
 
         this.traertramites();
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Trámite actualizado con exito</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
 
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al intentar actualizar el tramite</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
 
 
@@ -816,7 +816,7 @@ export class ConfiguracionComponent implements OnInit {
         mensaje = mensaje + "<br> * " + mensajes[i];
       }
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;' + mensaje + '</div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
     }
   }
 
@@ -882,7 +882,7 @@ export class ConfiguracionComponent implements OnInit {
         this.loading = false;
 
                   var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;' + error.message +'.</div></span>';
-                  M.toast({ html: toastHTML });
+                  M.toast({ html: toastHTML , displayLength:40000});
 
       });
   }
@@ -939,7 +939,7 @@ export class ConfiguracionComponent implements OnInit {
     if(data.data.unionByTramite.length>0){
       if(Object.entries(data.data.unionByTramite[0].configuracion).length == 0){
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp No tiene configuracion, favor de agregarla</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       }else{
 
         setTimeout(() => {
@@ -993,14 +993,14 @@ export class ConfiguracionComponent implements OnInit {
           });
           this.traertramites();
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Trámite agregado con exito</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         }
 
       }, (error) => {
         this.loading = false;
 
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al crear el Trámite</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -1023,12 +1023,12 @@ export class ConfiguracionComponent implements OnInit {
         });
         this.traertramites();
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Trámite agregado con exito</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
        }, (error) => {
          this.loading = false;
 
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al tratar del cambiar el estado del trámite</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -1056,7 +1056,7 @@ export class ConfiguracionComponent implements OnInit {
       this.validarrequisito();
     }else{
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;No puede agregar mas requisitos si no ha completado los anteriores.    </div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
 
 
     }
@@ -1099,7 +1099,7 @@ export class ConfiguracionComponent implements OnInit {
       this.validarrequisitoedicion();
     }else{
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;No puede agregar mas requisitos si no ha completado los anteriores.    </div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
 
 
     }
@@ -1156,7 +1156,7 @@ export class ConfiguracionComponent implements OnInit {
       if (datecompare.getTime() < datecompare2.getTime()) {
         this.validaciondiatope = false;
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Fecha no disponible, es menor al ultimo tope creado.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       } else {
         this.validaciondiatope = true;
       }
@@ -1175,7 +1175,7 @@ export class ConfiguracionComponent implements OnInit {
         }
       }).subscribe(result => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Nueva Fecha Agregada.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.traerFechasTope();
         this.limpiarmodaltope();
         this.validaciondiatope = false;
@@ -1183,7 +1183,7 @@ export class ConfiguracionComponent implements OnInit {
 
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al intentar crear la nueva fecha.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -1235,14 +1235,14 @@ export class ConfiguracionComponent implements OnInit {
             }
           }).subscribe(result => {
             var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Día Eliminado.    </div></span>';
-            M.toast({ html: toastHTML });
+            M.toast({ html: toastHTML , displayLength:40000});
             this.traerFechasTope();
             this.limpiarmodaltope();
             (<any>$(".modal")).modal('close');
             this.validaciondiatope = false;
           }, (error) => {
             var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al tratar del eliminar el día</div></span>';
-            M.toast({ html: toastHTML });
+            M.toast({ html: toastHTML , displayLength:40000});
           });
       }
     })
@@ -1373,7 +1373,7 @@ export class ConfiguracionComponent implements OnInit {
   verificarUnionTramite(data,tramite){
     if(Object.entries(data.data.unionByTramite[0].configuracion).length == 0){
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp No tiene configuracion</div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
     }else{
       let letrero= '¿Desea activar el trámite ' + tramite.label + '?';
       let letrero2= 'Activar';
@@ -1406,11 +1406,11 @@ export class ConfiguracionComponent implements OnInit {
               }
             }).subscribe(result => {
               var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Cambio realizado correctamente.    </div></span>';
-              M.toast({ html: toastHTML });
+              M.toast({ html: toastHTML , displayLength:40000});
               this.traertramites();
              }, (error) => {
               var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al tratar del cambiar el estado del trámite</div></span>';
-              M.toast({ html: toastHTML });
+              M.toast({ html: toastHTML , displayLength:40000});
             });
         }
       })
@@ -1517,7 +1517,7 @@ export class ConfiguracionComponent implements OnInit {
      this.horasdos = null;
     }else{
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Favor de escribir un número correcto</div></span>';
-     M.toast({html: toastHTML});
+     M.toast({html: toastHTML, displayLength:40000});
     }
 
   }
@@ -1539,7 +1539,7 @@ export class ConfiguracionComponent implements OnInit {
      this.horasdosedicion = null;
     }else{
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Favor de escribir un número correcto</div></span>';
-     M.toast({html: toastHTML});
+     M.toast({html: toastHTML, displayLength:40000});
     }
 
   }
@@ -1700,12 +1700,12 @@ export class ConfiguracionComponent implements OnInit {
         });
         this.traertramites();
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Configuración actualizado con exito</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.loading = false;
       }, (error) => {
 
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al actualizar la configuración</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -1885,12 +1885,12 @@ export class ConfiguracionComponent implements OnInit {
          });
          this.traertramites();
          var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Configuración actualizado con exito</div></span>';
-         M.toast({ html: toastHTML });
+         M.toast({ html: toastHTML , displayLength:40000});
          this.loading = false;
        }, (error) => {
 
          var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al actualizar la configuración</div></span>';
-         M.toast({ html: toastHTML });
+         M.toast({ html: toastHTML , displayLength:40000});
        });
    }
 
@@ -1983,7 +1983,7 @@ export class ConfiguracionComponent implements OnInit {
       }
     }).subscribe(result => {      
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ordenamiento cambiado.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
       this.traertramites();
        }, (error) => {
 
@@ -2027,11 +2027,11 @@ export class ConfiguracionComponent implements OnInit {
          this.recomendacion = null;
          this.traerRecomendaciones();
          var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Recomendación creada con exito</div></span>';
-         M.toast({ html: toastHTML });
+         M.toast({ html: toastHTML , displayLength:40000});
        }, (error) => {
 
          var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp Error al crear la recomendación</div></span>';
-         M.toast({ html: toastHTML });
+         M.toast({ html: toastHTML , displayLength:40000});
        });
 
    }
@@ -2061,7 +2061,7 @@ export class ConfiguracionComponent implements OnInit {
     }).subscribe(result => {
       
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ordenamiento cambiado.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
       this.traerRecomendaciones();
        }, (error) => {
 
@@ -2082,7 +2082,7 @@ export class ConfiguracionComponent implements OnInit {
     }).subscribe(result => {
       
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Recomendación daba de baja.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
       this.traerRecomendaciones();
       this.loading = false;
 
@@ -2105,7 +2105,7 @@ export class ConfiguracionComponent implements OnInit {
     }).subscribe(result => {
       
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Recomendación activada.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
       this.traerRecomendaciones();
       this.loading = false;
        }, (error) => {

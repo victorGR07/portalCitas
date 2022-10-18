@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
     window.location.href = "/pendientes";
 
     }else{
-      M.toast({html: '<i class="material-icons left">info</i> Acceso denegado!'})
+      M.toast({html: '<i class="material-icons left">info</i> Acceso denegado!', displayLength:40000})
     }
   }
 

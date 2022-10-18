@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit {
         this.asignarRecomendaciones(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -119,7 +119,7 @@ export class RegisterComponent implements OnInit {
       }, (error) => {
 
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error 389. Error en red.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.dialimite = false;
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error 399. Error en red.    </div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
     }
   }
 
@@ -243,7 +243,7 @@ export class RegisterComponent implements OnInit {
         this.disabledHora = true;
         this.horaSeleccionada = null;
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Día no disponible para selección de citas.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       } else {
         this.loading = true;
         this.disabledHora = true;
@@ -259,7 +259,7 @@ export class RegisterComponent implements OnInit {
             this.asignarHoras(result);
           }, (error) => {
             var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error.    </div></span>';
-            M.toast({ html: toastHTML });
+            M.toast({ html: toastHTML , displayLength:40000});
           });
       }
     }
@@ -321,7 +321,7 @@ export class RegisterComponent implements OnInit {
         this.asignarDias(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error, favor de verificar su conexión a Internet.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -455,7 +455,7 @@ export class RegisterComponent implements OnInit {
         this.verificarDatosRFC(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -465,7 +465,7 @@ export class RegisterComponent implements OnInit {
       this.cuartopaso();
     }else{
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; RFC con una cita agendada.    </div></span>';
-      M.toast({html: toastHTML});
+      M.toast({html: toastHTML, displayLength:40000});
     }
   }
 
@@ -574,7 +574,7 @@ export class RegisterComponent implements OnInit {
       this.loading = false;
 
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;' + error.message +'.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
 
       });
 
@@ -611,7 +611,7 @@ export class RegisterComponent implements OnInit {
         this.asignarHoras(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 

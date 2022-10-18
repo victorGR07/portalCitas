@@ -128,7 +128,7 @@ export class CitaComponent implements OnInit {
         this.asignarEstados(result);
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Ocurrio un error.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -164,7 +164,7 @@ export class CitaComponent implements OnInit {
         }, (error) => {
           this.loading = false;
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Número de cita no encontrado en el sistema.    </div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         });
     }
 
@@ -182,7 +182,7 @@ export class CitaComponent implements OnInit {
         }, (error) => {
           this.loading = false;
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Folio no encontrado en el sistema.    </div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         });
     }
 
@@ -202,7 +202,7 @@ export class CitaComponent implements OnInit {
       }, (error) => {
         this.loading = false;
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Folio no encontrado en el sistema.    </div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
       });
   }
 
@@ -211,7 +211,7 @@ export class CitaComponent implements OnInit {
     this.booleansinobservaciones = false;
     if (data.data.citaPersonalizada.length==0) {
       var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Folio no encontrado en el sistema.    </div></span>';
-      M.toast({ html: toastHTML });
+      M.toast({ html: toastHTML , displayLength:40000});
       this.loading = false;
     } else {
       this.objCita = data.data.citaPersonalizada[0];
@@ -331,7 +331,7 @@ export class CitaComponent implements OnInit {
           }
 
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Cita no disponible para verificación, fecha de la cita: ' +dia21 +  "-" + mes21 + "-" + anio21+ ' .    </div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
           this.loading = false;
 
         }
@@ -387,11 +387,11 @@ export class CitaComponent implements OnInit {
           }
         }).subscribe(result => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; Se ha agregado el comentario a la cita.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
 
         }, (error) => {
           var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al guardar el comentario.</div></span>';
-          M.toast({ html: toastHTML });
+          M.toast({ html: toastHTML , displayLength:40000});
         });
     }
 
@@ -478,7 +478,7 @@ export class CitaComponent implements OnInit {
 
          }, (error) => {
            var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita.</div></span>';
-           M.toast({ html: toastHTML });
+           M.toast({ html: toastHTML , displayLength:40000});
            this.loading = false;
 
          });
@@ -499,12 +499,12 @@ export class CitaComponent implements OnInit {
         }
       }).subscribe(result => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp; La cita se ha marcado como finalizada.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.loading = false;
         this.buscarFolio();
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.loading = false;
 
       });
@@ -537,7 +537,7 @@ export class CitaComponent implements OnInit {
 
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.loading = false;
 
       });
@@ -558,7 +558,7 @@ export class CitaComponent implements OnInit {
          this.atenderCita()
       }, (error) => {
         var toastHTML = '<span> <div class="valign-wrapper"><i class="material-icons">error_outline</i>  &nbsp;&nbsp;Error al finalizar la cita.</div></span>';
-        M.toast({ html: toastHTML });
+        M.toast({ html: toastHTML , displayLength:40000});
         this.loading = false;
 
       });

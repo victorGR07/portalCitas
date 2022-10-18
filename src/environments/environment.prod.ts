@@ -1,7 +1,7 @@
 
 export const environment = {
   production: true,
-  URIBackProveedores:'http://172.16.10.51:1336/api',
+  URIBackProveedores:'http://citasproveedoresbk.oaxaca.gob.mx/api',
   project_name: "Proveedores",
   project_version: 'v1.0.0'
 };
